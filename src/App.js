@@ -229,26 +229,6 @@ class App extends Component {
         </div>
       );
     }
-    // console.log('stringified', JSON.stringify(keystore));
-    // return (
-    //   <div className="App">
-    //     <header className="App-header">
-    //       <img src={logo} className="App-logo" alt="logo"/>
-    //       <h1 className="App-title">Welcome to React</h1>
-    //     </header>
-    //     <p className="App-intro">
-    //       To get started, edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    {/*<a href={URL.createObjectURL(new Blob([JSON.stringify(keystore), {type: 'text/plain'}]))}*/
-    }
-    {/*download={this.generateFileName(acc.address)}*/
-    }
-    {/*>*/
-    }
-    //       Download keystore
-    //     </a>
-        {/*<input type="file" name="keystoreInput" onChange={(event) => this.uploadKeystore(event)}/>*/}
-    //     <h1>Sep</h1>
     //     <h4>Contract Address </h4>
     //     <input
     //       value={this.state.contractAddress}
@@ -458,13 +438,22 @@ class App extends Component {
   }
 
   uploadKeystore(fileObject, password) {
-    console.log('password=',password);
     const reader = new FileReader();
     reader.onload = (e) => {
       // the -15 gets rid of [object Object] at the end of the string. Don't know why it's there
       const keystore = this.props.web3.eth.accounts.decrypt(JSON.parse(e.target.result.substring(0, e.target.result.length - 15)), password);
       console.log(keystore);
       if (keystore) {
+        const publicKey = keystore.address;
+        this.props.setPrivateKey(keystore.privateKey);
+        this.props.setPublicKey(publicKey);
+        this.props.setSignTransactionFunction(keystore.signTransaction);
+        this.props.web3.eth.getBalance(publicKey).then(balance => {
+          this.props.setAccountBalance(this.props.web3.utils.fromWei(this.props.accountBalance, 'ether'));
+        });
+        console.log(this.props.privateKey);
+        console.log(this.props.publicKey);
+
         alert('successfully read in keystore');
       } else {
         alert('password entered incorrectly');
@@ -478,7 +467,11 @@ const mapStateToProps = (state) => {
   return {
     web3: state.web3,
     screen: state.screen,
-    favorites: state.favorites
+    favorites: state.favorites,
+    privateKey: state.privateKey,
+    publicKey: state.publicKey,
+    accountBalance: state.accountBalance,
+    signTransactionFn: state.signTransactionFn
   };
 };
 
@@ -486,7 +479,11 @@ const mapDispatchToProps = (dispatch) => {
   return {
     goInitialState: () => dispatch({type: actionTypes.SET_INITIAL_STATE}),
     goCreationState: () => dispatch({type: actionTypes.SET_CREATION_STATE}),
-    goMainState: () => dispatch({type: actionTypes.SET_MAIN_STATE})
+    goMainState: () => dispatch({type: actionTypes.SET_MAIN_STATE}),
+    setPrivateKey: (privateKey) => dispatch({type: actionTypes.SET_PRIVATE_KEY, payload: privateKey}),
+    setPublicKey: (publicKey) => dispatch({type: actionTypes.SET_PUBLIC_KEY, payload: publicKey}),
+    setAccountBalance: (accountBalance) => dispatch({type: actionTypes.SET_ACCOUNT_BALANCE, payload: accountBalance}),
+    setSignTransactionFunction: (signTransactionFunction) => dispatch({type: actionTypes.SET_SIGN_TRANSACTION_FUNCTION, payload: signTransactionFunction})
   };
 };
 

@@ -9,6 +9,10 @@ const initialState = {
   web3: web3,
   favorites: favoritesArray,
   screen: states.INITIAL_STATE,
+  privateKey: '',
+  publicKey: '',
+  accountBalance: '',
+  signTransactionFn: null
 };
 
 const reducer = (state = initialState, action) => {
@@ -27,6 +31,26 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         screen: states.MAIN_STATE
+      };
+    case actionTypes.SET_PUBLIC_KEY:
+      return {
+        ...state,
+        publicKey: action.payload
+      };
+    case actionTypes.SET_PRIVATE_KEY:
+      return {
+        ...state,
+        privateKey: action.payload
+      };
+    case actionTypes.SET_ACCOUNT_BALANCE:
+      return {
+        ...state,
+        accountBalance: action.payload
+      };
+    case actionTypes.SET_SIGN_TRANSACTION_FUNCTION:
+      return {
+        ...state,
+        signTransactionFn: action.payload
       };
     default:
       return state;
