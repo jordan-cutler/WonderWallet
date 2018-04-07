@@ -8,7 +8,7 @@ const favoritesArray = JSON.parse(localStorage.getItem('favoritesArray')) || [];
 const initialState = {
   web3: web3,
   favorites: favoritesArray,
-  screen: states.INITIAL_STATE
+  screen: states.INITIAL_STATE,
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,8 +28,9 @@ const reducer = (state = initialState, action) => {
         ...state,
         screen: states.MAIN_STATE
       };
+    default:
+      return state;
   }
-  return state;
 };
 
 export default reducer;
