@@ -3,8 +3,20 @@ body {
     height: 100vh;
 }
 
+.btn-black {
+    background-color: #000;
+}
+
+.btn-bottom {
+    margin-bottom: 40px;
+}
 
 .friend {
+}
+
+.chip-custom {
+    border-style: solid;
+    border-color: #000;
 }
 
 .wonder {
@@ -29,8 +41,13 @@ body {
 }
 
 .topRow {
-    height: 17%;
-    margin-bottom: 1px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.active-chip {
+    background-color: #000;
+    color: #fff;
 }
 
 .sideBar {

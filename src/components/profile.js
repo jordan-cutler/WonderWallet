@@ -8,7 +8,7 @@ class Profile extends React.Component {
       <div className="row col s12">
         <div className="col s12 m7">
           <h5>Public Key:{this.props.publicKey}</h5>
-          <h6>{this.props.accountBalance}</h6>
+          <h6>Balance: {this.props.accountBalance} ether</h6>
         </div>
       </div>
     );

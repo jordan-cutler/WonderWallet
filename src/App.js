@@ -14,7 +14,6 @@ class App extends Component {
     contractSymbol: '',
     passwordForNewKeystore: '',
     passwordForUploadedKeystore: '',
-    showPreloader: false,
     keyStoreFileUploaded: null
   };
 
@@ -28,28 +27,7 @@ class App extends Component {
     // console.log(keystore);
     // const decrypted = this.props.web3.eth.accounts.decrypt(keystore, PASSWORD);
     // console.log('decrypted', decrypted);
-    const preloader = (
-      <div className={classNames({
-        'preloader-wrapper': true,
-        'active': true,
-        'hide': !this.state.showPreloader
-      })}>
-        <div className="spinner-layer spinner-red-only">
-          <div className="circle-clipper left">
-            <div className="circle">
-            </div>
-          </div>
-          <div className="gap-patch">
-            <div className="circle">
-            </div>
-          </div>
-          <div className="circle-clipper right">
-            <div className="circle">
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    console.log(this.props.screen);
     if (this.props.screen === 0) {
       return (
         <div style={{marginTop: 50}}>
@@ -72,21 +50,27 @@ class App extends Component {
                     <label htmlFor="password">Password</label>
                   </div>
                 </div>
-                <a onClick={() => this.downloadKeystore(this.state.passwordForNewKeystore)}
-                   className="btn waves-effect waves-light" name="action"
+                <button
+                  onClick={() => this.downloadKeystore(this.state.passwordForNewKeystore)}
+                  className="btn waves-effect btn-black btn-bottom waves-light"
                 >
                   Generate My Keystore
-                </a>
+                </button>
               </form>
 
-              {preloader}
-
               <div className="container hide">
-                <a href="/" download className="waves-effect waves-light btn-large"><i
-                  className="material-icons">file_download</i>Download My Keystore</a>
+                <p className="waves-effect btn-black btn-bottom waves-light btn-large">
+                  <i className="material-icons">file_download</i>Download My Keystore
+                </p>
               </div>
-
-              <h5 onClick={this.props.goCreationState}>Upload an existing keystore</h5>
+              <div className="chipz">
+                <div className="chip chip-custom active-chip">
+                  Create A Keystore
+                </div>
+                <div onClick={this.props.goCreationState} className="chip chip-custom">
+                  Upload A Keystore
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -105,7 +89,7 @@ class App extends Component {
                 <div className="row formRow">
                   <div className="col m3"></div>
                   <div className="col s12 m6 file-field input-field">
-                    <div className="btn">
+                    <div className="btn btn-black">
                       <span>File</span>
                       <input
                         type="file"
@@ -117,7 +101,7 @@ class App extends Component {
                       />
                     </div>
                     <div className="file-path-wrapper">
-                      <input id="filename" className="file-path validate" type="text"
+                      <input id="filename" className="btn-black file-path validate" type="text"
                              value="Upload Keystore Here" readOnly={true}/>
                     </div>
                   </div>
@@ -139,13 +123,19 @@ class App extends Component {
                 </div>
                 <button
                   onClick={() => this.uploadKeystore(this.state.keyStoreFileUploaded, this.state.passwordForUploadedKeystore)}
-                  className="btn waves-effect waves-light"
-                  name="action"
+                  className="btn btn-black btn-bottom waves-effect waves-light"
                 >
                   Submit
                 </button>
               </form>
-              <h5 onClick={this.props.goInitialState}>Create A Keystore</h5>
+              <div>
+                <div onClick={this.goInitialState} className="chip chip-custom">
+                  Create A Keystore
+                </div>
+                <div className="chip chip-custom active-chip">
+                  Upload A Keystore
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -156,7 +146,6 @@ class App extends Component {
           <div className="row topRow center-align">
             <div className="wonder center-align">W&#0246;nderWallet</div>
             <div className="tagline center-align">It is time to blockchain human again</div>
-            <a className="waves-effect btn-flat" onClick={this.props.goInitialState}>Sign Out</a>
           </div>
           <div className="scrollmenu">
             <Favorites favoritesArray={this.props.favorites}/>
@@ -252,36 +241,20 @@ class App extends Component {
       alert('passwordForNewKeystore must be at least 9 characters long');
       return;
     }
-    this.showPreloader();
     const element = document.createElement('a');
     element.style.display = 'none';
-
     const acc = this.props.web3.eth.accounts.create();
-    element.setAttribute('href', URL.createObjectURL(new Blob([JSON.stringify(
-      this.props.web3.eth.accounts.encrypt(
-        acc.privateKey,
-        password
-      )), {type: 'text/plain'}])));
+    const keystore = this.props.web3.eth.accounts.encrypt(
+      acc.privateKey,
+      password
+    );
+    element.setAttribute('href', URL.createObjectURL(new Blob([JSON.stringify(keystore), {type: 'text/plain'}])));
     element.setAttribute('download', this.generateFileName(acc.address));
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
-    this.hidePreloader();
-  }
-
-  showPreloader() {
-    console.log('showing preloader');
-    this.setState({
-      showPreloader: true
-    });
-
-  }
-
-  hidePreloader() {
-    console.log('hiding preloader');
-    this.setState({
-      showPreloader: false
-    });
+    this.setStatePropertiesFromKeystore(keystore);
+    this.props.goMainState();
   }
 
   generateFileName(publicKey) {
@@ -437,22 +410,23 @@ class App extends Component {
       const keystore = this.props.web3.eth.accounts.decrypt(JSON.parse(e.target.result.substring(0, e.target.result.length - 15)), password);
       console.log(keystore);
       if (keystore) {
-        const publicKey = keystore.address;
-        this.props.setPrivateKey(keystore.privateKey);
-        this.props.setPublicKey(publicKey);
-        this.props.setSignTransactionFunction(keystore.signTransaction);
-        this.props.web3.eth.getBalance(publicKey).then(balance => {
-          this.props.setAccountBalance(this.props.web3.utils.fromWei(this.props.accountBalance, 'ether'));
-        });
-        console.log(this.props.privateKey);
-        console.log(this.props.publicKey);
-
-        alert('successfully read in keystore');
+        this.setStatePropertiesFromKeystore(keystore);
+        this.props.goMainState();
       } else {
         alert('password entered incorrectly');
       }
     };
     reader.readAsText(fileObject);
+  }
+
+  setStatePropertiesFromKeystore(keystore) {
+    const publicKey = keystore.address;
+    this.props.web3.eth.getBalance(publicKey).then(balance => {
+      this.props.setAccountBalance(this.props.web3.utils.fromWei(balance, 'ether'));
+      this.props.setPrivateKey(keystore.privateKey);
+      this.props.setPublicKey(publicKey);
+      this.props.setSignTransactionFunction(keystore.signTransaction);
+    });
   }
 }
 
