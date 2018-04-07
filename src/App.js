@@ -8,13 +8,6 @@ import classNames from 'classnames';
 const VITALIK_ADDRESS = '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B';
 const SNOVIO_ADDRESS = '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969';
 
-const Userr = {
-  currentBalance: 6900,
-  publicKey: '01234567890123456789012345678901234567890123456789'
-};
-
-const PASSWORD = 'testabc';
-
 class App extends Component {
   state = {
     contractAddress: '',
@@ -172,7 +165,7 @@ class App extends Component {
             <ul className="collection with-header col s12 center-align sideBar"></ul>
           </div>
           <div className="row profile-row">
-            <Profile user={Userr}/>
+            <Profile />
           </div>
           <div className="row form-row">
             <div className="row col s12 m8">
