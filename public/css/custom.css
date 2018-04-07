@@ -1,0 +1,105 @@
+
+body {
+    height: 100vh;
+}
+
+
+.friend {
+}
+
+.wonder {
+    font-size:3.5em;
+}
+
+.tagline {
+    font-size:1em;
+}
+
+.bottomRow {
+    height:78%;
+    margin-bottom: 1px;
+}
+
+.formRow {
+    margin-bottom:.1rem;
+}
+
+.divider {
+    margin-bottom: 0px;
+}
+
+.topRow {
+    height: 17%;
+    margin-bottom: 1px;
+}
+
+.sideBar {
+    height:100%;
+    overflow-y: scroll;
+    margin-top: 0px;
+}
+
+.hack {
+    padding:5px 3px 5px 3px !important;
+    cursor:default;
+}
+
+.hackbutton {
+    background-color: white !important;
+    cursor:pointer;
+}
+
+
+.hack1 {
+    background-color: #ff6961;
+}
+
+.hackbutton1 {
+    color:#ff6961 !important;
+}
+
+
+.hack2 {
+    background-color: #77dd77;
+}
+
+.hackbutton2 {
+    color:#77dd77 !important;
+}
+
+
+.hack3 {
+    background-color: #7777dd;
+}
+
+.hackbutton3 {
+    color:#7777dd !important;
+}
+
+
+.hack4 {
+    background-color: #77dd77;
+}
+
+.hackbutton4 {
+    color:#77dd77 !important;
+}
+
+
+.edit {
+    cursor:pointer;
+}
+
+.editbutton {
+    height:.5em;
+}
+
+.key-style {
+    margin-left: 20px;
+    width: 70%;
+    color: #fff;
+}
+
+.key-container {
+    margin: 0 auto;
+}

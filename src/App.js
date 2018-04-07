@@ -2,8 +2,15 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
-
+import Favorites from './components/favorites.js'
+import Profile from './components/profile.js'
+import * as actionTypes from './store/actions';
 const VITALIK_ADDRESS = '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B';
+
+const Userr = {
+  currentBalance: 6900,
+  publicKey: "01234567890123456789012345678901234567890123456789"
+};
 
 class App extends Component {
   state = {
@@ -12,16 +19,106 @@ class App extends Component {
   };
 
   render() {
-    // const acc = this.props.web3.eth.accounts.create();
-    // console.log(acc);
-    // console.log(this.props.web3.eth.accounts.create('hello'));
-    // const vitalikAccountBalance = this.props.web3.eth.getBalance(VITALIK_ADDRESS);
-    // vitalikAccountBalance.then(console.log);
-    // const password = "testabc";
-    // const keystore = this.props.web3.eth.accounts.encrypt(acc.privateKey, password);
-    // console.log(keystore);
-    // const decrypted = this.props.web3.eth.accounts.decrypt(keystore, password);
-    // console.log('decrypted',decrypted);
+    const acc = this.props.web3.eth.accounts.create();
+    console.log(acc);
+    console.log(this.props.web3.eth.accounts.create('hello'));
+    const vitalikAccountBalance = this.props.web3.eth.getBalance(VITALIK_ADDRESS);
+    vitalikAccountBalance.then(console.log);
+    const password = "testabc";
+    const keystore = this.props.web3.eth.accounts.encrypt(acc.privateKey, password);
+    console.log(keystore);
+    const decrypted = this.props.web3.eth.accounts.decrypt(keystore, password);
+    console.log('decrypted',decrypted);
+    // if(this.props.screen === 0) {
+    //   return (
+    //     <div>
+    //       <h1>Upload your keystore</h1>
+    //       <input type="file" id="myFile"></input>
+    //       <input type="password" name="psw"></input>
+    //       <button onClick={this.props.goMainState}>Submit</button>
+    //       <p onClick={this.props.goCreationState}>Create A Keystore</p>
+    //     </div>
+    //   );
+    // } else if(this.props.screen === 1) {
+    //   return (
+    //     <div>
+    //       <h1>Create a keystore</h1>
+    //       <input type="password" name="psw"></input>
+    //       <button onClick={this.props.goMainState}>Create Keystore</button>
+    //       <p onClick={this.props.goInitialState}>Upload A Keystore</p>
+    //     </div>
+    //   );
+    // } else {
+    //   return (
+    //     <div>
+    //       <div className="row topRow center-align">
+    //         <div className="wonder center-align">W&#0246;nderWallet</div>
+    //         <div className="tagline center-align">It is time to blockchain human again</div>
+    //         <button onClick={this.props.goInitialState}>Sign Out</button>
+    //       </div>
+    //       <div className="row bottomRow">
+    //
+    //         <hr className="divider"></hr>
+    //         <ul className="collection with-header col s12 m4 center-align sideBar">
+    //           <li className="collection-header"><h4>Favorites</h4></li>
+    //           <Favorites favoritesArray={this.props.favorites}/>
+    //         </ul>
+    //         <Profile user={Userr}/>
+    //         <div className="row col s12 m8">
+    //           <hr></hr>
+    //           <h4>Make a Payment:</h4>
+    //           <form className="col s12">
+    //             <div className="row formRow">
+    //               <div className="input-field col s12 m11">
+    //                 <i className="material-icons prefix">face</i>
+    //                 <textarea id="receiver" className="materialize-textarea"></textarea>
+    //                 <label for="receiver">Receiver Public Key</label>
+    //               </div>
+    //             </div>
+    //             <div className="row formRow">
+    //               <div className="input-field col s7 m8">
+    //                 <i className="material-icons prefix">local_atm</i>
+    //                 <textarea id="amount" className="materialize-textarea"></textarea>
+    //                 <label for="amount">Amount</label>
+    //               </div>
+    //               <div className="input-field col s5 m3">
+    //                 <h5>= $666.69 USD</h5>
+    //               </div>
+    //             </div>
+    //             <div className="row formRow">
+    //               <div className="input-field col s12 m6">
+    //                 <i className="material-icons prefix">present_to_all</i>
+    //                 <select className="icons" id="crypto">
+    //                   <option value="" className="disabled selected">Choose Your Token</option>
+    //                   <option value="APPC" data-icon="images/appcoins.png" className="left">AppCoins
+    //                     (APPC)
+    //                   </option>
+    //                   <option value="EOS" data-icon="images/eos.png" className="left">EOS (EOS)
+    //                   </option>
+    //                   <option value="LRC" data-icon="images/loopring.png" className="left">Loopring
+    //                     (LRC)
+    //                   </option>
+    //                   <option value="SNOV" data-icon="images/snovio.png" className="left">Snovio
+    //                     (SNOV)
+    //                   </option>
+    //                   <option value="WETH" data-icon="images/weth.png" className="left">WETH
+    //                     (WETH)
+    //                   </option>
+    //                 </select>
+    //               </div>
+    //               <div className="input-field col s12 m5">
+    //                 <i className="material-icons prefix">textsms</i>
+    //                 <input type="text" id="autocomplete-input" className="autocomplete"></input>
+    //                 <label for="autocomplete-input">Ticker Lookup</label>
+    //               </div>
+    //             </div>
+    //           </form>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   );
+    // }
+    console.log('stringified', JSON.stringify(keystore));
     return (
       <div className="App">
         <header className="App-header">
@@ -31,11 +128,11 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        {/*<a href={JSON.stringify(keystore)}*/}
-        {/*download={this.generateFileName(acc.address)}*/}
-        {/*>*/}
-        {/*Download keystore*/}
-        {/*</a>*/}
+        <a href={URL.createObjectURL(new Blob([JSON.stringify(keystore), {type: 'text/plain'}]))}
+        download={this.generateFileName(acc.address)}
+        >
+        Download keystore
+        </a>
         <input type="file" name="keystoreInput" onChange={(event) => this.fileUploaded(event)}/>
         <h1>Sep</h1>
         <input type="file" name="keystoreInput" onChange={(event) => this.imageUploaded(event)}/>
@@ -103,7 +200,7 @@ class App extends Component {
     //   .on('error', function(error) {
     //     console.log('err', error);
     //   });
-    this.verifyERC20(address, 'SNOV', 18).then(console.log)
+    this.verifyERC20(address, 'SNOV').then(console.log)
   }
 
   getERC20Contract(address) {
@@ -227,28 +324,14 @@ class App extends Component {
       .then((symbolResponse) => {
         console.log(symbolResponse);
         console.log(symbol);
-        console.log(symbolResponse == symbol);
-        return symbolResponse == symbol;
+        return symbolResponse === symbol;
       }).catch(e => {
         return false;
       });
-
-    // return contract.methods.decimals().call()
-    //   .then((decimalsResponse) => {
-    //   console.log(decimalsResponse);
-    //   console.log(decimals);
-    //     if (decimalsResponse != decimals) {
-    //       return false;
-    //     }
-    //
-    //   })
-    //   .catch(e => {
-    //     return false;
-    //   });
-
   }
 
   fileUploaded(event) {
+    console.log('made it into file uploaded');
     const fileObject = event.target.files[0];
     const encryptedKeystore = {
       'lastModified': fileObject.lastModified,
@@ -264,9 +347,11 @@ class App extends Component {
       console.log(e.target.result);
       console.log('break2');
       console.log(JSON.stringify(e.target.result));
-      const keystore = this.props.web3.eth.accounts.decrypt(JSON.stringify(e.target.result), 'testabc');
+      console.log(e.target.result.substring(0, e.target.result.length - 15));
+      const keystore = this.props.web3.eth.accounts.decrypt(JSON.parse(e.target.result.substring(0, e.target.result.length - 15)), 'testabc');
+      console.log(keystore);
     };
-    reader.readAsText(new Blob([JSON.stringify(encryptedKeystore), {type: 'application/json'}]));
+    reader.readAsText(fileObject);
 
     //console.log(keystore);
     console.log('file uploaded');
@@ -275,8 +360,18 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    web3: state.web3
+    web3: state.web3,
+    screen: state.screen,
+    favorites: state.favorites
   };
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    goInitialState: () => dispatch({type: actionTypes.SET_INITIAL_STATE}),
+    goCreationState: () => dispatch({type: actionTypes.SET_CREATION_STATE}),
+    goMainState: () => dispatch({type: actionTypes.SET_MAIN_STATE})
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
