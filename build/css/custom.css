@@ -146,6 +146,15 @@ ul::-webkit-scrollbar-thumb {
     outline: 1px solid slategrey !important;
 }
 
+.active-chip {
+    background-color: #000;
+    color: #fff;
+}
+
+.btn-black {
+    background-color: #000;
+}
+
 .coinActive {
     background-color: black;
     color:white;
