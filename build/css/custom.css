@@ -1,0 +1,207 @@
+body {
+    height: 100vh;
+}
+
+.friendTitle {
+    margin: .3rem 0rem .3rem 0rem !important;
+}
+
+.friendTitleRow {
+    margin: .3rem 0rem .3rem 0rem !important;
+}
+
+.friendSlider {
+    height: 14em !important;
+}
+
+.friendCollec {
+    display:inline-block !important;
+    width:100% !important;
+    background-color:inherit;
+    border:none;
+}
+
+.friendContainer {
+    display: block;
+}
+
+.friend {
+    display: inline-block !important;
+    width:49%;
+    border-bottom: 0px !important;
+}
+
+.wonder {
+    font-size:3.5em;
+}
+
+.tagline {
+    font-size:1em;
+}
+
+.logo {
+    background-color:transparent;
+    width:100% !important;
+}
+
+.logoSpec {
+    background-color:white;
+    width:100% !important;
+}
+
+.bottomRow {
+    height:78%;
+    margin-bottom: 1px;
+}
+
+.formRow {
+    margin-bottom:.1rem;
+}
+
+.divider {
+    margin-bottom: 0px;
+}
+
+.topRow {
+    height: 17%;
+    margin-bottom: 1px;
+}
+
+.sideBar {
+    height:100%;
+    overflow-y: scroll;
+    margin-top: 0px;
+}
+
+.hack1, .hack2, .hack3, .hack4 {
+    color:white;
+    padding:5px 3px 5px 3px !important;
+    cursor:default;
+}
+
+.hackbutton1, .hackbutton2, .hackbutton3, .hackbutton4 {
+    background-color: white !important;
+    cursor:pointer;
+}
+
+.hackbutton1:hover, .hackbutton2:hover, .hackbutton3:hover, .hackbutton4:hover {
+    background-color: #d3d3d3;
+}
+
+
+.hack1 {
+    background-color: #ff6961 !important;
+}
+
+.hackbutton1 {
+    color:#ff6961 !important;
+}
+
+
+.hack2 {
+    background-color: #77dd77 !important;
+}
+
+.hackbutton2 {
+    color:#77dd77 !important;
+}
+
+
+.hack3 {
+    background-color: #7777dd !important;
+}
+
+.hackbutton3 {
+    color:#7777dd !important;
+}
+
+
+.hack4 {
+    background-color: #77dd77;
+}
+
+.hackbutton4 {
+    color:#77dd77 !important;
+}
+
+
+.edit {
+    cursor:pointer;
+}
+
+.editbutton {
+    height:.5em;
+}
+
+ul::-webkit-scrollbar {
+    width: 1em !important;
+}
+
+ul::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3) !important;
+}
+
+ul::-webkit-scrollbar-thumb {
+    background-color: darkgrey !important;
+    outline: 1px solid slategrey !important;
+}
+
+.coinActive {
+    background-color: black;
+    color:white;
+    border-radius:.5rem;
+    cursor: pointer;
+}
+
+.coinActive:hover {
+    background-color: #4F4F4F;
+    transition: .2s;
+}
+
+.coinInactive:hover {
+    background-color: #AFAFAF;
+    transition: .2s;
+}
+
+.coinInactive {
+    background-color: gray;
+    color:white;
+    border-radius:.5rem;
+    border:.1rem solid white;
+    margin-bottom: 0px;
+    cursor: pointer;
+}
+
+.description {
+    height: 2.5rem;
+    font-size: 15px;
+}
+
+.finalForm {
+    margin-bottom: .2rem;
+    margin-top: .2rem;
+}
+
+.myinformation {
+    font-size: 2em;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #444;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #222;
+}

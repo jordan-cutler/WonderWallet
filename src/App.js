@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import * as actionTypes from './store/actions';
+import { connect } from 'react-redux';
 
 const VITALIK_ADDRESS = '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B';
 const SNOVIO_ADDRESS = '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969';
