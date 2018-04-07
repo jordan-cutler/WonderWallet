@@ -1,9 +1,50 @@
 import Web3 from 'web3';
 import * as states from './states';
 import * as actionTypes from './actions';
-let web3 = new Web3("https://rinkeby.infura.io/4VagvCAdkEkPEFAJw8LU");
+
+let web3 = new Web3('https://rinkeby.infura.io/4VagvCAdkEkPEFAJw8LU');
 
 const favoritesArray = JSON.parse(localStorage.getItem('favoritesArray')) || [];
+
+const defaultTokens = [
+  {
+    name: 'Ethereum',
+    symbol: 'ETH',
+    contractAddress: null,
+    decimals: 18
+  },
+  {
+    name: 'AppCoin',
+    symbol: 'APPC',
+    contractAddress: '0x1a7a8BD9106F2B8D977E08582DC7d24c723ab0DB',
+    decimals: 18
+  },
+  {
+    name: 'EOS',
+    symbol: 'EOS',
+    contractAddress: '0x86Fa049857E0209aa7D9e616F7eb3b3B78ECfdb0',
+    decimals: 18
+  },
+  {
+    name: 'Loopring',
+    symbol: 'LRC',
+    contractAddress: '0xEF68e7C694F40c8202821eDF525dE3782458639f',
+    decimals: 18
+
+  },
+  {
+    name: 'Snovio',
+    symbol: 'SNOV',
+    contractAddress: '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969',
+    decimals: 18
+  },
+  {
+    name: 'WETH',
+    symbol: 'WETH',
+    contractAddress: '0x2956356cD2a2bf3202F771F50D3D14A367b48070',
+    decimals: 18
+  }
+];
 
 const initialState = {
   web3: web3,
@@ -12,7 +53,8 @@ const initialState = {
   privateKey: '',
   publicKey: '',
   accountBalance: '',
-  signTransactionFn: null
+  signTransactionFn: null,
+  tokens: defaultTokens
 };
 
 const reducer = (state = initialState, action) => {

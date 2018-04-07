@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 import * as actionTypes from './store/actions';
 import { connect } from 'react-redux';
+import EthereumImage from './assets/ethereum.png';
+import AppCoinImage from './assets/appcoins.png';
+import EOSImage from './assets/eos.png';
+import PlusImage from './assets/plus.png';
+import SnovioImage from './assets/snovio.png';
+import WethImage from './assets/weth.png';
+import LoopringImage from './assets/loopring.png';
+import * as constants from './store/constants';
 
 const VITALIK_ADDRESS = '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B';
 const SNOVIO_ADDRESS = '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969';
@@ -75,7 +83,6 @@ class App extends Component {
         });
     });
 
-
   }
 
   render() {
@@ -104,12 +111,12 @@ class App extends Component {
                     <label htmlFor="password">Password</label>
                   </div>
                 </div>
-                <button
+                <a
                   onClick={() => this.downloadKeystore(this.state.passwordForNewKeystore)}
                   className="btn waves-effect btn-black btn-bottom waves-light"
                 >
                   Generate My Keystore
-                </button>
+                </a>
               </form>
 
               <div className="container hide">
@@ -175,12 +182,12 @@ class App extends Component {
                     <label htmlFor="password">Password</label>
                   </div>
                 </div>
-                <button
+                <a
                   onClick={() => this.uploadKeystore(this.state.keyStoreFileUploaded, this.state.passwordForUploadedKeystore)}
                   className="btn btn-black btn-bottom waves-effect waves-light"
                 >
                   Submit
-                </button>
+                </a>
               </form>
               <div>
                 <div onClick={this.goInitialState} className="chip chip-custom">
@@ -313,11 +320,11 @@ class App extends Component {
               </div>
               <div className="col s12 m6">
                 <h6><strong>Public Key:</strong></h6>
-                <h6>KSDJRGHWIRUHSNVIDLNKBLXN</h6>
+                <h6>{this.props.publicKey}</h6>
               </div>
               <div className="col s12 m6">
                 <h6><strong>Current Balance:</strong></h6>
-                <h6>100000 ETH | $420.69 USD</h6>
+                <h6>{this.props.accountBalance} ETH </h6>
               </div>
             </div>
 
@@ -350,39 +357,39 @@ class App extends Component {
                   </div>
                 </div>
                 <div className="row formRow">
-                  <div value="ETH" className="col s3 m1 coinActive">
+                  <div value={this.props.tokens[constants.tokenIndices["Ethereum"]].symbol} className="col s3 m1 coinActive">
                     <p></p>
-                    <img className="logoSpec circle" src="images/ethereum.png"/>
-                    <p className="center-align description">Ethereum (ETH)</p>
+                    <img className="logoSpec circle" src={EthereumImage}/>
+                    <p className="center-align description">{this.props.tokens[constants.tokenIndices["Ethereum"]].name} ({this.props.tokens[constants.tokenIndices["Ethereum"]].symbol})</p>
                   </div>
-                  <div value="APPC" className="col s3 m1 coinInactive">
+                  <div value={this.props.tokens[constants.tokenIndices["AppCoin"]].symbol} className="col s3 m1 coinInactive">
                     <p></p>
-                    <img className="logo circle" src="images/appcoins.png"/>
-                    <p className="center-align description">AppCoins (APPC)</p>
+                    <img className="logo circle" src={AppCoinImage}/>
+                    <p className="center-align description">{this.props.tokens[constants.tokenIndices["AppCoin"]].name} ({this.props.tokens[constants.tokenIndices["AppCoin"]].symbol})</p>
                   </div>
-                  <div value="EOS" className="col s3 m1 coinInactive">
+                  <div value={this.props.tokens[constants.tokenIndices["EOS"]].symbol} className="col s3 m1 coinInactive">
                     <p></p>
-                    <img className="logoSpec circle" src="images/eos.png"/>
-                    <p className="center-align description">EOS (EOS)</p>
+                    <img className="logoSpec circle" src={EOSImage}/>
+                    <p className="center-align description">{this.props.tokens[constants.tokenIndices["EOS"]].name} ({this.props.tokens[constants.tokenIndices["EOS"]].symbol})</p>
                   </div>
-                  <div value="LRC" className="col s3 m1 coinInactive">
+                  <div value={this.props.tokens[constants.tokenIndices["Loopring"]].symbol} className="col s3 m1 coinInactive">
                     <p></p>
-                    <img className="logo circle" src="images/loopring.png"/>
-                    <p className="center-align description">Loopring (LRC)</p>
+                    <img className="logo circle" src={LoopringImage}/>
+                    <p className="center-align description">{this.props.tokens[constants.tokenIndices["Loopring"]].name} ({this.props.tokens[constants.tokenIndices["Loopring"]].symbol})</p>
                   </div>
-                  <div value="SNOV" className="col s3 m1 coinInactive">
+                  <div value={this.props.tokens[constants.tokenIndices["Snovio"]].symbol} className="col s3 m1 coinInactive">
                     <p></p>
-                    <img className="logo circle" src="images/snovio.png"/>
-                    <p className="center-align description">Snovio (SNOV)</p>
+                    <img className="logo circle" src={SnovioImage}/>
+                    <p className="center-align description">{this.props.tokens[constants.tokenIndices["Snovio"]].name} ({this.props.tokens[constants.tokenIndices["Snovio"]].symbol})</p>
                   </div>
-                  <div value="WETH" className="col s3 m1 coinInactive">
+                  <div value={this.props.tokens[constants.tokenIndices["WETH"]].symbol} className="col s3 m1 coinInactive">
                     <p></p>
-                    <img className="logo circle" src="images/weth.png"/>
-                    <p className="center-align description">WETH (WETH)</p>
+                    <img className="logo circle" src={WethImage}/>
+                    <p className="center-align description">{this.props.tokens[constants.tokenIndices["WETH"]].name} ({this.props.tokens[constants.tokenIndices["WETH"]].symbol})</p>
                   </div>
                   <div value="other" className="col s3 m1 coinInactive">
                     <p></p>
-                    <img className="logo circle" src="images/plus.png"/>
+                    <img className="logo circle" src={PlusImage}/>
                     <p className="center-align description">Other</p>
                   </div>
                   <div className="col s3"></div>
@@ -627,7 +634,8 @@ const mapStateToProps = (state) => {
     privateKey: state.privateKey,
     publicKey: state.publicKey,
     accountBalance: state.accountBalance,
-    signTransactionFn: state.signTransactionFn
+    signTransactionFn: state.signTransactionFn,
+    tokens: state.tokens
   };
 };
 
