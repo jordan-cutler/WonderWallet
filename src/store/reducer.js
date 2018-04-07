@@ -1,7 +1,7 @@
 import Web3 from 'web3';
 import * as states from './states';
 import * as actionTypes from './actions';
-let web3 = new Web3("https://mainnet.infura.io/4VagvCAdkEkPEFAJw8LU ");
+let web3 = new Web3("https://rinkeby.infura.io/4VagvCAdkEkPEFAJw8LU");
 
 const favoritesArray = JSON.parse(localStorage.getItem('favoritesArray')) || [];
 

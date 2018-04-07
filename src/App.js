@@ -6,11 +6,14 @@ import Favorites from './components/favorites.js'
 import Profile from './components/profile.js'
 import * as actionTypes from './store/actions';
 const VITALIK_ADDRESS = '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B';
+const SNOVIO_ADDRESS = '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969';
 
 const Userr = {
   currentBalance: 6900,
   publicKey: "01234567890123456789012345678901234567890123456789"
 };
+
+const PASSWORD = "testabc";
 
 class App extends Component {
   state = {
@@ -24,10 +27,9 @@ class App extends Component {
     console.log(this.props.web3.eth.accounts.create('hello'));
     const vitalikAccountBalance = this.props.web3.eth.getBalance(VITALIK_ADDRESS);
     vitalikAccountBalance.then(console.log);
-    const password = "testabc";
-    const keystore = this.props.web3.eth.accounts.encrypt(acc.privateKey, password);
+    const keystore = this.props.web3.eth.accounts.encrypt(acc.privateKey, PASSWORD);
     console.log(keystore);
-    const decrypted = this.props.web3.eth.accounts.decrypt(keystore, password);
+    const decrypted = this.props.web3.eth.accounts.decrypt(keystore, PASSWORD);
     console.log('decrypted',decrypted);
     // if(this.props.screen === 0) {
     //   return (
@@ -135,7 +137,6 @@ class App extends Component {
         </a>
         <input type="file" name="keystoreInput" onChange={(event) => this.fileUploaded(event)}/>
         <h1>Sep</h1>
-        <input type="file" name="keystoreInput" onChange={(event) => this.imageUploaded(event)}/>
         <h4>Contract Address </h4>
         <input
           value={this.state.contractAddress}
@@ -157,50 +158,23 @@ class App extends Component {
     );
   }
 
+  sendTransaction() {
+
+  }
+
   generateFileName(publicKey) {
     const today = new Date();
     return `UTC--${today}-${publicKey}.json`;
   }
 
-  imageUploaded(event) {
-    console.log(event.target.files[0]);
-  }
-
   addNewToken() {
     console.log(this.state.contractAddress);
     console.log(this.state.contractSymbol);
-    const address = '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969';
-    const contract = this.getERC20Contract(address);
-    console.log(contract);
-    contract.methods.name().call().then((name) => {
-      console.log('made it in');
-      console.log(name);
-    });
-    contract.methods.decimals().call().then((name) => {
-      console.log('made it in');
-      console.log(name);
-    });
-    contract.methods.totalSupply().call().then((name) => {
-      console.log('made it in');
-      console.log(name);
-    });
-    console.log('hello');
-    // contract.methods.name().send({
-    //   from: '0x734B7e03144742156E18f8224e2338Bb95b99f89'
-    // }).on('transactionHash', function(hash) {
-    //     console.log(hash);
-    //   })
-    //   .on('confirmation', function(confirmationNumber, receipt) {
-    //     console.log(confirmationNumber);
-    //     console.log(receipt);
-    //   })
-    //   .on('receipt', function(receipt) {
-    //     console.log(receipt);
-    //   })
-    //   .on('error', function(error) {
-    //     console.log('err', error);
-    //   });
-    this.verifyERC20(address, 'SNOV').then(console.log)
+    const contract = this.getERC20Contract(SNOVIO_ADDRESS);
+    // change the parameters to the contractAddress and symbol later on.
+    return this.verifyERC20(SNOVIO_ADDRESS, 'SNOV').then((successful) => {
+      return successful;
+    })
   }
 
   getERC20Contract(address) {
@@ -315,16 +289,20 @@ class App extends Component {
         'type': 'function'
       }
     ], address);
-
   }
 
   verifyERC20(address, symbol) {
     const contract = this.getERC20Contract(address);
     return contract.methods.symbol().call()
       .then((symbolResponse) => {
-        console.log(symbolResponse);
-        console.log(symbol);
-        return symbolResponse === symbol;
+        if (symbolResponse !== symbol) {
+          return false;
+        }
+        return contract.methods.balanceOf(VITALIK_ADDRESS).call().then((balance) => {
+          return true;
+        }).catch(e => {
+          return false;
+        });
       }).catch(e => {
         return false;
       });
@@ -333,28 +311,13 @@ class App extends Component {
   fileUploaded(event) {
     console.log('made it into file uploaded');
     const fileObject = event.target.files[0];
-    const encryptedKeystore = {
-      'lastModified': fileObject.lastModified,
-      'lastModifiedDate': fileObject.lastModifiedDate,
-      'name': fileObject.name,
-      'size': fileObject.size,
-      'type': fileObject.type
-    };
-    console.log(encryptedKeystore);
     const reader = new FileReader();
     reader.onload = (e) => {
-      console.log('break1');
-      console.log(e.target.result);
-      console.log('break2');
-      console.log(JSON.stringify(e.target.result));
-      console.log(e.target.result.substring(0, e.target.result.length - 15));
+      // the -15 gets rid of [object Object] at the end of the string. Don't know why it's there
       const keystore = this.props.web3.eth.accounts.decrypt(JSON.parse(e.target.result.substring(0, e.target.result.length - 15)), 'testabc');
       console.log(keystore);
     };
     reader.readAsText(fileObject);
-
-    //console.log(keystore);
-    console.log('file uploaded');
   }
 }
 
