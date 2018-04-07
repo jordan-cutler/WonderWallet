@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-let web3 = new Web3("https://rinkeby.infura.io/4VagvCAdkEkPEFAJw8LU");
+let web3 = new Web3("https://mainnet.infura.io/4VagvCAdkEkPEFAJw8LU ");
 
 const initialState = {
   web3: web3
