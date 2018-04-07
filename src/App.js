@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { connect } from 'react-redux';
-import Favorites from './components/favorites.js';
-import Profile from './components/profile.js';
-import * as actionTypes from './store/actions';
-import classNames from 'classnames';
+
 const VITALIK_ADDRESS = '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B';
 const SNOVIO_ADDRESS = '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969';
 
@@ -17,17 +13,74 @@ class App extends Component {
     keyStoreFileUploaded: null
   };
 
+  doStuff() {
+    const contractAddress = '0xc778417E063141139Fce010982780140Aa0cD5Ab';
+    const wethContract = this.getERC20Contract(contractAddress);
+    const myAddress = '0xd8F4d1493ec3b76674856b4c01dF4d337B3df97D';
+    wethContract.methods.balanceOf(myAddress).call().then(balance => {
+      console.log(balance);
+    });
+
+    // const abi = wethContract.methods.transfer('0x4d8a1663c0fa4dcd9000c5f72cc4af0dad2884dd', this.props.web3.utils.toWei('0.1', 'ether')).encodeABI();
+    // const rawTransaction = {
+    //   "from": this.props.publicKey,
+    //   "gas": "400000",
+    //   "to": contractAddress,
+    //   "value": "0x0",
+    //   "data": abi
+    // };
+    // const signedTransaction = this.props.signTransactionFn(rawTransaction);
+    // console.log(signedTransaction);
+    // signedTransaction.then(transactionObj => {
+    //   this.props.web3.eth.sendSignedTransaction(transactionObj.rawTransaction)
+    //     .on('receipt', (receipt) => {
+    //       console.log(receipt)
+    //     })
+    //     .on('confirmation', (confirmation) => {
+    //       console.log('confirmed',confirmation);
+    //     })
+    //     .on('error', (error) => {
+    //       console.log('error occurred sending transaction', error);
+    //     })
+    // });
+
+    const loopringContractAddress = '0x1B923812146bA032db7e99feC891f67624B42895';
+    const loopringContract = this.getERC20Contract(loopringContractAddress);
+    loopringContract.methods.balanceOf(myAddress).call().then(balance => {
+      console.log('balancelrc', balance);
+    });
+    const lrcTransaction = {
+      'from': this.props.publicKey,
+      'gas': '400000',
+      'to': loopringContractAddress,
+      'value': this.props.web3.utils.toWei('0.1', 'ether')
+    };
+    const lrcSignedTransaction = this.props.signTransactionFn(lrcTransaction);
+    console.log(lrcSignedTransaction);
+    lrcSignedTransaction.then(transactionObj => {
+      this.props.web3.eth.sendSignedTransaction(transactionObj.rawTransaction)
+        .on('receipt', (receipt) => {
+          console.log(receipt);
+          loopringContract.methods.balanceOf(myAddress).call().then(balance => {
+            console.log('balancelrc', balance);
+          });
+        })
+        .on('confirmation', (confirmation) => {
+          console.log('confirmed', confirmation);
+        })
+        .on('error', (error) => {
+          console.log('error occurred sending transaction', error);
+        });
+    });
+
+
+  }
+
   render() {
     // const acc = this.props.web3.eth.accounts.create();
     // console.log(acc);
     // console.log(this.props.web3.eth.accounts.create('hello'));
-    // const vitalikAccountBalance = this.props.web3.eth.getBalance(VITALIK_ADDRESS);
-    // vitalikAccountBalance.then(console.log);
-    // const keystore = this.props.web3.eth.accounts.encrypt(acc.privateKey, PASSWORD);
-    // console.log(keystore);
-    // const decrypted = this.props.web3.eth.accounts.decrypt(keystore, PASSWORD);
-    // console.log('decrypted', decrypted);
-    console.log(this.props.screen);
+
     if (this.props.screen === 0) {
       return (
         <div style={{marginTop: 50}}>
@@ -35,7 +88,6 @@ class App extends Component {
             <div className="wonder center-align">W&#0246;nderWallet</div>
             <div className="tagline center-align">It is time to blockchain human again</div>
           </div>
-
           <div className="row bottomRow">
             <div className="container center-align">
               <h4>Get a Keystore</h4>
@@ -145,64 +197,216 @@ class App extends Component {
         <div>
           <div className="row topRow center-align">
             <div className="wonder center-align">W&#0246;nderWallet</div>
-            <div className="tagline center-align">It is time to blockchain human again</div>
+            <div className="tagline center-align">it is time to blockchain human again</div>
           </div>
-          <div className="scrollmenu">
-            <Favorites favoritesArray={this.props.favorites}/>
-          </div>
-          <div className="row fav-row">
-            <ul className="collection with-header col s12 center-align sideBar"></ul>
-          </div>
-          <div className="row profile-row">
-            <Profile />
-          </div>
-          <div className="row form-row">
-            <div className="row col s12 m8">
+
+          <div className="row bottomRow">
+            <hr className="divider"></hr>
+            <div className="row col s12 grey white-text">
+              <div className="row friendTitleRow">
+                <div className="col s12 left-align">
+                  <h4 className="friendTitle">Friends</h4>
+                </div>
+              </div>
+              <div className="carousel carousel-slider center friendSlider">
+                <div className="friendContainer">
+                  <div className="row">
+                    <div className="col s12 carousel-item white-text" href="#one!">
+                      <ul className="collection with-header col s12 m4 center-align friendCollec">
+                        <li className="collection-item friend hack1">
+                          <div className="hack1">
+                            <div>
+                              <div className="right-align col s12 editbutton"><a
+                                className="btn-floating btn-small hackbutton1"><i
+                                className="material-icons hackbutton1">mode_edit</i></a></div>
+                              <div className="center-align row">
+                                <div className="col s4">
+                                  <i className="center-align large material-icons">insert_chart</i>
+                                </div>
+                                <div className="col s6">
+                                  <p>PUBLIC KEY 1</p>
+                                  <a className="waves-effect waves-light btn hackbutton1">Pay
+                                    Me
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li className="collection-item friend hack3">
+                          <div className="hack3">
+                            <div>
+                              <div className="right-align col s12 editbutton"><a
+                                className="btn-floating btn-small hackbutton3"><i
+                                className="material-icons hackbutton3">mode_edit</i></a></div>
+                              <div className="center-align row">
+                                <div className="col s4">
+                                  <i className="center-align large material-icons">insert_chart</i>
+                                </div>
+                                <div className="col s6">
+                                  <p>PUBLIC KEY 1</p>
+                                  <a className="waves-effect waves-light btn hackbutton3">Pay
+                                    Me</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col s12 carousel-item white-text" href="#one!">
+                      <ul className="collection with-header col s12 m4 center-align friendCollec">
+                        <li className="collection-item friend hack2">
+                          <div className="hack2">
+                            <div>
+                              <div className="right-align col s12 editbutton"><a
+                                className="btn-floating btn-small hackbutton2"><i
+                                className="material-icons hackbutton2">mode_edit</i></a></div>
+                              <div className="center-align row">
+                                <div className="col s4">
+                                  <i className="center-align large material-icons">insert_chart</i>
+                                </div>
+                                <div className="col s6">
+                                  <p>PUBLIC KEY 1</p>
+                                  <a className="waves-effect waves-light btn hackbutton2">Pay
+                                    Me</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        <li className="collection-item friend hack1">
+                          <div className="hack1">
+                            <div>
+                              <div className="right-align col s12 editbutton"><a
+                                className="btn-floating btn-small hackbutton1"><i
+                                className="material-icons hackbutton1">mode_edit</i></a></div>
+                              <div className="center-align row">
+                                <div className="col s4">
+                                  <i
+                                    className="center-align large material-icons">insert_chart</i>
+                                </div>
+                                <div className="col s6">
+                                  <p>PUBLIC KEY 1</p>
+                                  <a className="waves-effect waves-light btn hackbutton1">Pay
+                                    Me</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="row col s12 m12">
+              <div className="col s12">
+                <strong><span className="myinformation">My Information</span></strong>
+              </div>
+              <div className="col s12 m6">
+                <h6><strong>Public Key:</strong></h6>
+                <h6>KSDJRGHWIRUHSNVIDLNKBLXN</h6>
+              </div>
+              <div className="col s12 m6">
+                <h6><strong>Current Balance:</strong></h6>
+                <h6>100000 ETH | $420.69 USD</h6>
+              </div>
+            </div>
+
+            <div className="row col s12">
               <hr></hr>
-              <h4>Make a Payment:</h4>
+              <h5>Make a Payment:</h5>
+
               <form className="col s12">
                 <div className="row formRow">
-                  <div className="input-field col s12 m11">
-                    <i className="material-icons prefix">face</i>
-                    <textarea id="receiver" className="materialize-textarea"></textarea>
-                    <label htmlFor="receiver">Receiver Public Key</label>
+                  <div className="row formRow">
+                    <div className="col m1"></div>
+                    <div className="input-field col s12 m10 finalForm">
+                      <i className="material-icons prefix">face</i>
+                      <textarea id="receiver" className="materialize-textarea"></textarea>
+                      <label htmlFor="receiver">Receiver Public Key</label>
+                    </div>
+                    <div className="col m1"></div>
+                  </div>
+                  <div className="row formRow">
+                    <div className="col m1"></div>
+                    <div className="input-field col s7 m7">
+                      <i className="material-icons prefix">local_atm</i>
+                      <textarea id="amount" className="materialize-textarea"></textarea>
+                      <label htmlFor="amount">Amount</label>
+                    </div>
+                    <div className="input-field col s5 m3">
+                      <h5>= $666.69 USD</h5>
+                    </div>
+                    <div className="col m1"></div>
                   </div>
                 </div>
                 <div className="row formRow">
-                  <div className="input-field col s7 m8">
-                    <i className="material-icons prefix">local_atm</i>
-                    <textarea id="amount" className="materialize-textarea"></textarea>
-                    <label htmlFor="amount">Amount</label>
+                  <div value="ETH" className="col s3 m1 coinActive">
+                    <p></p>
+                    <img className="logoSpec circle" src="images/ethereum.png"/>
+                    <p className="center-align description">Ethereum (ETH)</p>
                   </div>
-                  <div className="input-field col s5 m3">
-                    <h5>= $666.69 USD</h5>
+                  <div value="APPC" className="col s3 m1 coinInactive">
+                    <p></p>
+                    <img className="logo circle" src="images/appcoins.png"/>
+                    <p className="center-align description">AppCoins (APPC)</p>
                   </div>
-                </div>
-                <div className="row formRow">
-                  <div className="input-field col s12 m6">
-                    <i className="material-icons prefix">present_to_all</i>
-                    <select className="icons" id="crypto">
-                      <option value="" className="disabled selected">Choose Your Token</option>
-                      <option value="APPC" data-icon="images/appcoins.png" className="left">AppCoins
-                        (APPC)
-                      </option>
-                      <option value="EOS" data-icon="images/eos.png" className="left">EOS (EOS)
-                      </option>
-                      <option value="LRC" data-icon="images/loopring.png" className="left">Loopring
-                        (LRC)
-                      </option>
-                      <option value="SNOV" data-icon="images/snovio.png" className="left">Snovio
-                        (SNOV)
-                      </option>
-                      <option value="WETH" data-icon="images/weth.png" className="left">WETH
-                        (WETH)
-                      </option>
-                    </select>
+                  <div value="EOS" className="col s3 m1 coinInactive">
+                    <p></p>
+                    <img className="logoSpec circle" src="images/eos.png"/>
+                    <p className="center-align description">EOS (EOS)</p>
                   </div>
-                  <div className="input-field col s12 m5">
-                    <i className="material-icons prefix">textsms</i>
-                    <input type="text" id="autocomplete-input" className="autocomplete"/>
-                    <label htmlFor="autocomplete-input">Ticker Lookup</label>
+                  <div value="LRC" className="col s3 m1 coinInactive">
+                    <p></p>
+                    <img className="logo circle" src="images/loopring.png"/>
+                    <p className="center-align description">Loopring (LRC)</p>
+                  </div>
+                  <div value="SNOV" className="col s3 m1 coinInactive">
+                    <p></p>
+                    <img className="logo circle" src="images/snovio.png"/>
+                    <p className="center-align description">Snovio (SNOV)</p>
+                  </div>
+                  <div value="WETH" className="col s3 m1 coinInactive">
+                    <p></p>
+                    <img className="logo circle" src="images/weth.png"/>
+                    <p className="center-align description">WETH (WETH)</p>
+                  </div>
+                  <div value="other" className="col s3 m1 coinInactive">
+                    <p></p>
+                    <img className="logo circle" src="images/plus.png"/>
+                    <p className="center-align description">Other</p>
+                  </div>
+                  <div className="col s3"></div>
+                  <div className="col s12 m5">
+                    <div className="row">
+                      <div className="input-field col s6 finalForm">
+                        <i className="material-icons prefix">textsms</i>
+                        <input disabled type="text" id="ticker" className="autocomplete"/>
+                        <label htmlFor="ticker">Ticker Lookup</label>
+                      </div>
+                      <div className="input-field col s6 finalForm">
+                        <i className="material-icons prefix">zoom_in</i>
+                        <input disabled type="text" id="decimal" placeholder="18"/>
+                        <label htmlFor="decimal">Decimal Places</label>
+                      </div>
+                      <div className="input-field col s12 finalForm">
+                        <i className="material-icons prefix">home</i>
+                        <input disabled type="text" id="address"/>
+                        <label htmlFor="address">Contract Address</label>
+                      </div>
+                      <div className="col s2"></div>
+                      <div className="col s8 center-align">
+                        <a className="waves-effect waves-light btn-large">Complete Transaction</a>
+                      </div>
+                      <div className="col s2"></div>
+                    </div>
                   </div>
                 </div>
               </form>
@@ -211,29 +415,6 @@ class App extends Component {
         </div>
       );
     }
-    //     <h4>Contract Address </h4>
-    //     <input
-    //       value={this.state.contractAddress}
-    //       id="contractAddressInput"
-    //       type="text"
-    //       name="contractAddress"
-    //       onChange={event => this.setState({contractAddress: event.target.value})}
-    //     />
-    //     <h4>Contract Symbol </h4>
-    //     <input
-    //       value={this.state.contractSymbol}
-    //       id="contractSymbolInput"
-    //       type="text"
-    //       name="contractSymbol"
-    //       onChange={event => this.setState({contractSymbol: event.target.value})}
-    //     />
-    //     <button onClick={() => this.addNewToken()}>Add New Token</button>
-    //   </div>
-    // );
-  }
-
-  sendTransaction() {
-
   }
 
   downloadKeystore(password) {
@@ -253,8 +434,7 @@ class App extends Component {
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
-    this.setStatePropertiesFromKeystore(keystore);
-    this.props.goMainState();
+    this.setStatePropertiesFromKeystoreThenGoToMainState(keystore);
   }
 
   generateFileName(publicKey) {
@@ -394,6 +574,7 @@ class App extends Component {
           return false;
         }
         return contract.methods.balanceOf(VITALIK_ADDRESS).call().then((balance) => {
+          // just check if calling it doesn't throw any errors
           return true;
         }).catch(e => {
           return false;
@@ -410,8 +591,7 @@ class App extends Component {
       const keystore = this.props.web3.eth.accounts.decrypt(JSON.parse(e.target.result.substring(0, e.target.result.length - 15)), password);
       console.log(keystore);
       if (keystore) {
-        this.setStatePropertiesFromKeystore(keystore);
-        this.props.goMainState();
+        this.setStatePropertiesFromKeystoreThenGoToMainState(keystore);
       } else {
         alert('password entered incorrectly');
       }
@@ -419,9 +599,16 @@ class App extends Component {
     reader.readAsText(fileObject);
   }
 
+  setStatePropertiesFromKeystoreThenGoToMainState(keystore) {
+    return this.setStatePropertiesFromKeystore(keystore)
+      .then(() => {
+        this.props.goMainState();
+      });
+  }
+
   setStatePropertiesFromKeystore(keystore) {
     const publicKey = keystore.address;
-    this.props.web3.eth.getBalance(publicKey).then(balance => {
+    return this.props.web3.eth.getBalance(publicKey).then(balance => {
       this.props.setAccountBalance(this.props.web3.utils.fromWei(balance, 'ether'));
       this.props.setPrivateKey(keystore.privateKey);
       this.props.setPublicKey(publicKey);
@@ -447,10 +634,19 @@ const mapDispatchToProps = (dispatch) => {
     goInitialState: () => dispatch({type: actionTypes.SET_INITIAL_STATE}),
     goCreationState: () => dispatch({type: actionTypes.SET_CREATION_STATE}),
     goMainState: () => dispatch({type: actionTypes.SET_MAIN_STATE}),
-    setPrivateKey: (privateKey) => dispatch({type: actionTypes.SET_PRIVATE_KEY, payload: privateKey}),
+    setPrivateKey: (privateKey) => dispatch({
+      type: actionTypes.SET_PRIVATE_KEY,
+      payload: privateKey
+    }),
     setPublicKey: (publicKey) => dispatch({type: actionTypes.SET_PUBLIC_KEY, payload: publicKey}),
-    setAccountBalance: (accountBalance) => dispatch({type: actionTypes.SET_ACCOUNT_BALANCE, payload: accountBalance}),
-    setSignTransactionFunction: (signTransactionFunction) => dispatch({type: actionTypes.SET_SIGN_TRANSACTION_FUNCTION, payload: signTransactionFunction})
+    setAccountBalance: (accountBalance) => dispatch({
+      type: actionTypes.SET_ACCOUNT_BALANCE,
+      payload: accountBalance
+    }),
+    setSignTransactionFunction: (signTransactionFunction) => dispatch({
+      type: actionTypes.SET_SIGN_TRANSACTION_FUNCTION,
+      payload: signTransactionFunction
+    })
   };
 };
 
