@@ -125,7 +125,7 @@ class App extends Component {
                 </p>
               </div>
               <div className="chipz">
-                <div className="chip chip-custom active-chip">
+                <div onClick={this.props.goInitialState} className="chip chip-custom active-chip">
                   Create A Keystore
                 </div>
                 <div onClick={this.props.goCreationState} className="chip chip-custom">
