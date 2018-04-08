@@ -267,7 +267,7 @@ class App extends Component {
                   <h5>= $666.69 USD</h5>
                 </div>
                 <div className="col m1"></div>
-                <div className="input-field col s7 m7">
+                <div className="input-field col s7 m7" style={{paddingLeft: 30, paddingBottom: 20}}>
 
                   <p><b>Hey, Wally here!</b> Choose a color to save this ID!</p>
                   <input type="color" id="html5colorpicker" onChange="clickColor(0, -1, -1, 5)" value="#ffffff" />
