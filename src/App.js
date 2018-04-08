@@ -211,110 +211,18 @@ class App extends Component {
             <div className="tagline center-align"><b>Hey! Welcome back.</b></div>
           </div>
 
-          <div className="row bottomRow">
-            <hr className="divider"></hr>
-            <div className="row col s12 grey white-text">
-              <div className="row friendTitleRow">
-                <div className="col s12 left-align">
-                  <h4 className="friendTitle">Friends</h4>
+          <div class="row col s12 friendRow">
+            <div class="friendContainer">
+              <div class="row friendMin">
+                <div class="col s12 carousel-item white-text" href="#one!">
+                  <ul class="collection with-header col s12 m4 center-align friendCollec">
+                    <Favorites favoritesArray={ favoritesArray } />
+                  </ul>
                 </div>
-              </div>
-              <div className="carousel carousel-slider center friendSlider">
-                <div className="friendContainer">
-                  <div className="row">
-                    <div className="col s12 carousel-item white-text" href="#one!">
-                      <ul className="collection with-header col s12 m4 center-align friendCollec">
-                        <li className="collection-item friend hack1">
-                          <div className="hack1">
-                            <div>
-                              <div className="right-align col s12 editbutton"><a
-                                className="btn-floating btn-small hackbutton1"><i
-                                className="material-icons hackbutton1">mode_edit</i></a></div>
-                              <div className="center-align row">
-                                <div className="col s4">
-                                  <i className="center-align large material-icons">insert_chart</i>
-                                </div>
-                                <div className="col s6">
-                                  <p>PUBLIC KEY 1</p>
-                                  <a className="waves-effect waves-light btn hackbutton1">Pay
-                                    Me
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                        <li className="collection-item friend hack3">
-                          <div className="hack3">
-                            <div>
-                              <div className="right-align col s12 editbutton"><a
-                                className="btn-floating btn-small hackbutton3"><i
-                                className="material-icons hackbutton3">mode_edit</i></a></div>
-                              <div className="center-align row">
-                                <div className="col s4">
-                                  <i className="center-align large material-icons">insert_chart</i>
-                                </div>
-                                <div className="col s6">
-                                  <p>PUBLIC KEY 1</p>
-                                  <a className="waves-effect waves-light btn hackbutton3">Pay
-                                    Me</a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col s12 carousel-item white-text" href="#one!">
-                      <ul className="collection with-header col s12 m4 center-align friendCollec">
-                        <li className="collection-item friend hack2">
-                          <div className="hack2">
-                            <div>
-                              <div className="right-align col s12 editbutton"><a
-                                className="btn-floating btn-small hackbutton2"><i
-                                className="material-icons hackbutton2">mode_edit</i></a></div>
-                              <div className="center-align row">
-                                <div className="col s4">
-                                  <i className="center-align large material-icons">insert_chart</i>
-                                </div>
-                                <div className="col s6">
-                                  <p>PUBLIC KEY 1</p>
-                                  <a className="waves-effect waves-light btn hackbutton2">Pay
-                                    Me</a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                        <li className="collection-item friend hack1">
-                          <div className="hack1">
-                            <div>
-                              <div className="right-align col s12 editbutton"><a
-                                className="btn-floating btn-small hackbutton1"><i
-                                className="material-icons hackbutton1">mode_edit</i></a></div>
-                              <div className="center-align row">
-                                <div className="col s4">
-                                  <i
-                                    className="center-align large material-icons">insert_chart</i>
-                                </div>
-                                <div className="col s6">
-                                  <p>PUBLIC KEY 1</p>
-                                  <a className="waves-effect waves-light btn hackbutton1">Pay
-                                    Me</a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
             <div className="row col s12 m12">
               <div className="col s12">
