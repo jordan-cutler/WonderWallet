@@ -271,7 +271,7 @@ class App extends Component {
                   </div>
               </div>
             </div>
-            <div className="row container">
+            <div className="row" style={{marginLeft: 30}}>
               <div className="added-tokens">
                 <h3>Added Tokens</h3>
                 <p>Dogereum (DGC)</p>
@@ -279,7 +279,7 @@ class App extends Component {
                 <p>CSBereum  (CSB)</p>
               </div>
             </div>
-            <div className="row formRow container">
+            <div className="row formRow">
               {this.props.tokens.map(token => {
                 return (
                   <TokenCard
