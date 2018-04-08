@@ -16,8 +16,7 @@ class App extends Component {
     contractSymbol: '',
     passwordForNewKeystore: '',
     passwordForUploadedKeystore: '',
-    keyStoreFileUploaded: null,
-    transactionAmount: 0
+    keyStoreFileUploaded: null
   };
 
   doStuff() {
@@ -87,8 +86,7 @@ class App extends Component {
     // const acc = this.props.web3.eth.accounts.create();
     // console.log(acc);
     // console.log(this.props.web3.eth.accounts.create('hello'));
-    console.log(this.state.transactionAmount);
-    console.log('usdval', this.props.ethUsdValue);
+
     if (this.props.screen === 0) {
       return (
         <div style={{marginTop: 50}}>
@@ -259,18 +257,14 @@ class App extends Component {
                 <div className="col m1"></div>
               </div>
               <div className="row formRow">
-                <p><b>Wally here.</b> Click a color to save this contact</p>
-                <input type="color" onchange="clickColor(0, -1, -1, 5)" value="#ffffff" style="width:85%; max-width: 200px" />
-              </div>
-              <div className="row formRow">
                 <div className="col m1"></div>
                 <div className="input-field col s7 m7">
                   <i className="material-icons prefix">local_atm</i>
-                  <textarea id="amount" className="materialize-textarea" onChange={(event) => this.setState({transactionAmount: event.target.value || Number('0')})}></textarea>
+                  <textarea id="amount" className="materialize-textarea"></textarea>
                   <label htmlFor="amount">Amount</label>
                 </div>
                 <div className="input-field col s5 m3">
-                  <h5>= ${(this.state.transactionAmount * this.props.ethUsdValue)} USD</h5>
+                  <h5>= $666.69 USD</h5>
                 </div>
                 <div className="col m1"></div>
               </div>
@@ -279,7 +273,6 @@ class App extends Component {
               {this.props.tokens.map(token => {
                 return (
                   <TokenCard
-                    key={token.symbol}
                     name={token.name}
                     symbol={token.symbol}
                     image={token.image}
@@ -547,8 +540,7 @@ const mapStateToProps = (state) => {
     accountBalance: state.accountBalance,
     signTransactionFn: state.signTransactionFn,
     tokens: state.tokens,
-    tokenBalances: state.tokenBalances,
-    ethUsdValue: state.ethUsdValue
+    tokenBalances: state.tokenBalances
   };
 };
 
