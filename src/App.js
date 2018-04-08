@@ -16,7 +16,8 @@ class App extends Component {
     contractSymbol: '',
     passwordForNewKeystore: '',
     passwordForUploadedKeystore: '',
-    keyStoreFileUploaded: null
+    keyStoreFileUploaded: null,
+    transactionAmount: 0
   };
 
   doStuff() {
@@ -260,11 +261,11 @@ class App extends Component {
                 <div className="col m1"></div>
                 <div className="input-field col s7 m7">
                   <i className="material-icons prefix">local_atm</i>
-                  <textarea id="amount" className="materialize-textarea"></textarea>
+                  <textarea id="amount" className="materialize-textarea" onChange={(event) => this.setState({transactionAmount: event.target.value})}></textarea>
                   <label htmlFor="amount">Amount</label>
                 </div>
                 <div className="input-field col s5 m3">
-                  <h5>= $666.69 USD</h5>
+                  <h5>= ${this.state.transactionAmount * this.props.ethUsdValue} USD</h5>
                 </div>
                 <div className="col m1"></div>
               </div>
@@ -273,6 +274,7 @@ class App extends Component {
               {this.props.tokens.map(token => {
                 return (
                   <TokenCard
+                    key={token.symbol}
                     name={token.name}
                     symbol={token.symbol}
                     image={token.image}
