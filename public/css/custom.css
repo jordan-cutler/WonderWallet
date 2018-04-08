@@ -2,6 +2,42 @@ body {
     height: 100vh;
 }
 
+.pastelBlue {
+  border-color:rgb(170, 200, 207);
+  color:rgb(170, 200, 207);
+}
+.pastelGreen {
+  border-color:rgb(120, 220, 120);
+  color:rgb(120, 220, 120);
+}
+.maroon {
+  border-color:rgb(142, 74, 73);
+  color:rgb(142, 74, 73);
+}
+.pastelRed{
+  border-color:rgb(255, 105, 97);
+  color:rgb(255, 105, 97);
+}
+
+.friendGroup {
+  border-width: .3rem;
+  border-style: solid;
+  border-radius:.5rem;
+}
+.publicKey {
+  margin-bottom:.5rem;
+  border:none;
+}
+.friendButton {
+  margin-bottom:.2rem;
+  height:3rem;
+  border-width: .3rem;
+  border-style: solid;
+  border-radius:.5rem;
+  color:inherit;
+  border-color:inherit;
+}
+
 .friendRow {
   width: 85%;
   margin: 0 auto;
