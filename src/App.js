@@ -264,7 +264,7 @@ class App extends Component {
                   <div className="switch">
                     <label>
                       Off
-                      <input type="checkbox">
+                      <input type="checkbox" />
                       <span className="lever"></span>
                       On
                     </label>
