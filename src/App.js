@@ -2,14 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import * as actionTypes from './store/actions';
 import { connect } from 'react-redux';
-import EthereumImage from './assets/ethereum.png';
-import AppCoinImage from './assets/appcoins.png';
-import EOSImage from './assets/eos.png';
-import PlusImage from './assets/plus.png';
-import SnovioImage from './assets/snovio.png';
-import WethImage from './assets/weth.png';
-import LoopringImage from './assets/loopring.png';
 import * as constants from './store/constants';
+import PlusImage from './assets/plus.png';
+import TokenCard from './components/token-card';
 
 const VITALIK_ADDRESS = '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B';
 const SNOVIO_ADDRESS = '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969';
@@ -211,126 +206,126 @@ class App extends Component {
 
           <div className="row bottomRow">
             <hr className="divider"></hr>
-            <div className="row col s12 grey white-text">
+            <div className="row col s12 friendRow">
               <div className="row friendTitleRow">
                 <div className="col s12 left-align">
                   <h4 className="friendTitle">Friends</h4>
                 </div>
               </div>
-              <div className="carousel carousel-slider center friendSlider">
-                <div className="friendContainer">
-                  <div className="row">
-                    <div className="col s12 carousel-item white-text" href="#one!">
-                      <ul className="collection with-header col s12 m4 center-align friendCollec">
-                        <li className="collection-item friend hack1">
-                          <div className="hack1">
-                            <div>
-                              <div className="right-align col s12 editbutton"><a
-                                className="btn-floating btn-small hackbutton1"><i
-                                className="material-icons hackbutton1">mode_edit</i></a></div>
-                              <div className="center-align row">
-                                <div className="col s4">
-                                  <i className="center-align large material-icons">insert_chart</i>
-                                </div>
-                                <div className="col s6">
-                                  <p>PUBLIC KEY 1</p>
-                                  <a className="waves-effect waves-light btn hackbutton1">Pay
-                                    Me
-                                  </a>
-                                </div>
+              <div className="friendContainer">
+                <div className="row friendMin">
+                  <div className="col s12 carousel-item white-text" href="#one!">
+                    <ul className="collection with-header col s12 m4 center-align friendCollec">
+                      <li className="collection-item friend hack1">
+                        <div className="hack1">
+                          <div>
+                            <div className="right-align col s12 editbutton"><a
+                              className="btn-floating btn-small hackbutton1"><i
+                              className="material-icons hackbutton1">mode_edit</i></a></div>
+                            <div className="center-align row">
+                              <div className="col s4">
+                                <i className="center-align large material-icons">insert_chart</i>
+                              </div>
+                              <div className="col s6">
+                                <p>PUBLIC KEY 1</p>
+                                <a className="waves-effect waves-light btn hackbutton1">Pay
+                                  Me
+                                </a>
                               </div>
                             </div>
                           </div>
-                        </li>
-                        <li className="collection-item friend hack3">
-                          <div className="hack3">
-                            <div>
-                              <div className="right-align col s12 editbutton"><a
-                                className="btn-floating btn-small hackbutton3"><i
-                                className="material-icons hackbutton3">mode_edit</i></a></div>
-                              <div className="center-align row">
-                                <div className="col s4">
-                                  <i className="center-align large material-icons">insert_chart</i>
-                                </div>
-                                <div className="col s6">
-                                  <p>PUBLIC KEY 1</p>
-                                  <a className="waves-effect waves-light btn hackbutton3">Pay
-                                    Me</a>
-                                </div>
+                        </div>
+                      </li>
+                      <li className="collection-item friend hack3">
+                        <div className="hack3">
+                          <div>
+                            <div className="right-align col s12 editbutton"><a
+                              className="btn-floating btn-small hackbutton3"><i
+                              className="material-icons hackbutton3">mode_edit</i></a></div>
+                            <div className="center-align row">
+                              <div className="col s4">
+                                <i className="center-align large material-icons">insert_chart</i>
+                              </div>
+                              <div className="col s6">
+                                <p>PUBLIC KEY 1</p>
+                                <a className="waves-effect waves-light btn hackbutton3">Pay
+                                  Me</a>
                               </div>
                             </div>
                           </div>
-                        </li>
-                      </ul>
-                    </div>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
 
-                  <div className="row">
-                    <div className="col s12 carousel-item white-text" href="#one!">
-                      <ul className="collection with-header col s12 m4 center-align friendCollec">
-                        <li className="collection-item friend hack2">
-                          <div className="hack2">
-                            <div>
-                              <div className="right-align col s12 editbutton"><a
-                                className="btn-floating btn-small hackbutton2"><i
-                                className="material-icons hackbutton2">mode_edit</i></a></div>
-                              <div className="center-align row">
-                                <div className="col s4">
-                                  <i className="center-align large material-icons">insert_chart</i>
-                                </div>
-                                <div className="col s6">
-                                  <p>PUBLIC KEY 1</p>
-                                  <a className="waves-effect waves-light btn hackbutton2">Pay
-                                    Me</a>
-                                </div>
+
+                  <div className="col s12 carousel-item white-text" href="#one!">
+                    <ul className="collection with-header col s12 m4 center-align friendCollec">
+                      <li className="collection-item friend hack2">
+                        <div className="hack2">
+                          <div>
+                            <div className="right-align col s12 editbutton"><a
+                              className="btn-floating btn-small hackbutton2"><i
+                              className="material-icons hackbutton2">mode_edit</i></a></div>
+                            <div className="center-align row">
+                              <div className="col s4">
+                                <i className="center-align large material-icons">insert_chart</i>
+                              </div>
+                              <div className="col s6">
+                                <p>PUBLIC KEY 1</p>
+                                <a className="waves-effect waves-light btn hackbutton2">Pay
+                                  Me</a>
                               </div>
                             </div>
                           </div>
-                        </li>
-                        <li className="collection-item friend hack1">
-                          <div className="hack1">
-                            <div>
-                              <div className="right-align col s12 editbutton"><a
-                                className="btn-floating btn-small hackbutton1"><i
-                                className="material-icons hackbutton1">mode_edit</i></a></div>
-                              <div className="center-align row">
-                                <div className="col s4">
-                                  <i
-                                    className="center-align large material-icons">insert_chart</i>
-                                </div>
-                                <div className="col s6">
-                                  <p>PUBLIC KEY 1</p>
-                                  <a className="waves-effect waves-light btn hackbutton1">Pay
-                                    Me</a>
-                                </div>
+                        </div>
+                      </li>
+                      <li className="collection-item friend hack1">
+                        <div className="hack1">
+                          <div>
+                            <div className="right-align col s12 editbutton"><a
+                              className="btn-floating btn-small hackbutton1"><i
+                              className="material-icons hackbutton1">mode_edit</i></a></div>
+                            <div className="center-align row">
+                              <div className="col s4">
+                                <i
+                                  className="center-align large material-icons">insert_chart</i>
+                              </div>
+                              <div className="col s6">
+                                <p>PUBLIC KEY 1</p>
+                                <a className="waves-effect waves-light btn hackbutton1">Pay
+                                  Me</a>
                               </div>
                             </div>
                           </div>
-                        </li>
-                      </ul>
-                    </div>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="row col s12 m12">
+            <div className="row col s12">
+              <hr></hr>
               <div className="col s12">
-                <strong><span className="myinformation">My Information</span></strong>
+                <strong><span className="myinformation">My Information:</span></strong>
               </div>
               <div className="col s12 m6">
-                <h6><strong>Public Key:</strong></h6>
+                <h6><strong><b>Public Key:</b></strong></h6>
                 <h6>{this.props.publicKey}</h6>
               </div>
               <div className="col s12 m6">
-                <h6><strong>Current Balance:</strong></h6>
+                <h6><strong><b>Current Balance:</b></strong></h6>
                 <h6>{this.props.accountBalance} ETH </h6>
               </div>
             </div>
 
             <div className="row col s12">
               <hr></hr>
-              <h5>Make a Payment:</h5>
+              <div className="col s12">
+                <strong><span className="myinformation">Make a Payment:</span></strong>
+              </div>
 
               <form className="col s12">
                 <div className="row formRow">
@@ -357,36 +352,16 @@ class App extends Component {
                   </div>
                 </div>
                 <div className="row formRow">
-                  <div value={this.props.tokens[constants.tokenIndices["Ethereum"]].symbol} className="col s3 m1 coinActive">
-                    <img className="logoSpec circle" src={EthereumImage}/>
-                    <p className="center-align description">{this.props.tokens[constants.tokenIndices["Ethereum"]].name} ({this.props.tokens[constants.tokenIndices["Ethereum"]].symbol})</p>
-                    <p className="center-align"><strong>{this.props.accountBalance}</strong></p>
-                  </div>
-                  <div value={this.props.tokens[constants.tokenIndices["AppCoin"]].symbol} className="col s3 m1 coinInactive">
-                    <img className="logo circle" src={AppCoinImage}/>
-                    <p className="center-align description">{this.props.tokens[constants.tokenIndices["AppCoin"]].name} ({this.props.tokens[constants.tokenIndices["AppCoin"]].symbol})</p>
-                    <p className="center-align"><strong>{this.props.tokenBalances["AppCoin"] / this.props.tokens[constants.tokenIndices["AppCoin"]].decimals}</strong></p>
-                  </div>
-                  <div value={this.props.tokens[constants.tokenIndices["EOS"]].symbol} className="col s3 m1 coinInactive">
-                    <img className="logoSpec circle" src={EOSImage}/>
-                    <p className="center-align description">{this.props.tokens[constants.tokenIndices["EOS"]].name} ({this.props.tokens[constants.tokenIndices["EOS"]].symbol})</p>
-                    <p className="center-align"><strong>{this.props.tokenBalances["EOS"] / this.props.tokens[constants.tokenIndices["EOS"]].decimals}</strong></p>
-                  </div>
-                  <div value={this.props.tokens[constants.tokenIndices["Loopring"]].symbol} className="col s3 m1 coinInactive">
-                    <img className="logo circle" src={LoopringImage}/>
-                    <p className="center-align description">{this.props.tokens[constants.tokenIndices["Loopring"]].name} ({this.props.tokens[constants.tokenIndices["Loopring"]].symbol})</p>
-                    <p className="center-align"><strong>{this.props.tokenBalances["Loopring"] / this.props.tokens[constants.tokenIndices["Loopring"]].decimals}</strong></p>
-                  </div>
-                  <div value={this.props.tokens[constants.tokenIndices["Snovio"]].symbol} className="col s3 m1 coinInactive">
-                    <img className="logo circle" src={SnovioImage}/>
-                    <p className="center-align description">{this.props.tokens[constants.tokenIndices["Snovio"]].name} ({this.props.tokens[constants.tokenIndices["Snovio"]].symbol})</p>
-                    <p className="center-align"><strong>{this.props.tokenBalances["Snovio"] / this.props.tokens[constants.tokenIndices["Snovio"]].decimals}</strong></p>
-                  </div>
-                  <div value={this.props.tokens[constants.tokenIndices["WETH"]].symbol} className="col s3 m1 coinInactive">
-                    <img className="logo circle" src={WethImage}/>
-                    <p className="center-align description">{this.props.tokens[constants.tokenIndices["WETH"]].name} ({this.props.tokens[constants.tokenIndices["WETH"]].symbol})</p>
-                    <p className="center-align"><strong>{this.props.tokenBalances["WETH"] / this.props.tokens[constants.tokenIndices["WETH"]].decimals}</strong></p>
-                  </div>
+                  {this.props.tokens.map(token => {
+                    return (
+                      <TokenCard
+                        name={token.name}
+                        symbol={token.symbol}
+                        image={token.image}
+                        balance={token.symbol === 'ETH' ? this.props.accountBalance : (this.props.tokenBalances[token.name] / token.decimals)}
+                      />
+                    )
+                  })}
                   <div value="other" className="col s3 m1 coinInactive">
                     <img className="logo circle" src={PlusImage}/>
                     <p className="center-align description">Other</p>
@@ -621,7 +596,7 @@ class App extends Component {
       contract.methods.balanceOf(publicKey).call().then(balance => {
         this.props.updateTokenBalance(token.name, balance);
       });
-    })
+    });
   }
 
   setStatePropertiesFromKeystoreThenGoToMainState(keystore) {

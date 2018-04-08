@@ -2,8 +2,13 @@ import Web3 from 'web3';
 import * as states from './states';
 import * as actionTypes from './actions';
 import * as constants from './constants';
-
-let web3 = new Web3('https://mainnet.infura.io/4VagvCAdkEkPEFAJw8LU ');
+import EthereumImage from '../assets/ethereum.png';
+import AppCoinImage from '../assets/appcoins.png';
+import EOSImage from '../assets/eos.png';
+import SnovioImage from '../assets/snovio.png';
+import WethImage from '../assets/weth.png';
+import LoopringImage from '../assets/loopring.png';
+let web3 = new Web3('https://mainnet.infura.io/4VagvCAdkEkPEFAJw8LU');
 
 const favoritesArray = JSON.parse(localStorage.getItem('favoritesArray')) || [];
 
@@ -12,38 +17,43 @@ const defaultTokens = [
     name: 'Ethereum',
     symbol: 'ETH',
     contractAddress: null,
-    decimals: 18
+    decimals: 18,
+    image: EthereumImage
   },
   {
     name: 'AppCoin',
     symbol: 'APPC',
     contractAddress: '0x1a7a8BD9106F2B8D977E08582DC7d24c723ab0DB',
-    decimals: 18
+    decimals: 18,
+    image: AppCoinImage
   },
   {
     name: 'EOS',
     symbol: 'EOS',
     contractAddress: '0x86Fa049857E0209aa7D9e616F7eb3b3B78ECfdb0',
-    decimals: 18
+    decimals: 18,
+    image: EOSImage
   },
   {
     name: 'Loopring',
     symbol: 'LRC',
     contractAddress: '0xEF68e7C694F40c8202821eDF525dE3782458639f',
-    decimals: 18
-
+    decimals: 18,
+    image: LoopringImage
   },
   {
     name: 'Snovio',
     symbol: 'SNOV',
     contractAddress: '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969',
-    decimals: 18
+    decimals: 18,
+    image: SnovioImage
   },
   {
     name: 'WETH',
     symbol: 'WETH',
     contractAddress: '0x2956356cD2a2bf3202F771F50D3D14A367b48070',
-    decimals: 18
+    decimals: 18,
+    image: WethImage
   }
 ];
 
