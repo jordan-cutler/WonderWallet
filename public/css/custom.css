@@ -48,11 +48,13 @@ body {
 .logo {
     background-color:transparent;
     width:100% !important;
+    margin-top: .75rem;
 }
 
 .logoSpec {
     background-color:white;
     width:100% !important;
+    margin-top: .75rem;
 }
 
 .bottomRow {
@@ -194,6 +196,7 @@ ul::-webkit-scrollbar-thumb {
 .description {
     height: 2.5rem;
     font-size: 15px;
+    margin-top: .2rem;
 }
 
 .finalForm {

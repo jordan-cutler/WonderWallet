@@ -6,3 +6,11 @@ export const tokenIndices = {
   Snovio: 4,
   WETH: 5
 };
+
+export const tokenBalances = {
+  AppCoin: 0,
+  EOS: 0,
+  Loopring: 0,
+  Snovio: 0,
+  WETH: 0
+};
