@@ -7,8 +7,8 @@ class Favorites extends React.Component {
     return this.props.favoritesArray.map((favorites) => {
       return (
         <div key={favorites.publicID} className="col s6 friendGroup" style={{color: favorites.color, borderColor: favorites.color}}>
-        	<i className="large material-icons" style={{color: favorites.color}}>hourglass_empty</i>
-        	<p className="truncate publicKey">0xd8F4d1493ec3b76674856b4c01dF4d337B3df97D</p>
+        	<i className="large material-icons" style={{color: favorites.color}}>{favorites.icon}</i>
+        	<p className="truncate publicKey">{favorites.publicID}</p>
         	<a className="waves-effect btn-flat valign-wrapper friendButton">Pay Me</a>
         </div>
       );

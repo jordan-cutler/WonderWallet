@@ -14,23 +14,23 @@ let web3 = new Web3('https://rinkeby.infura.io/4VagvCAdkEkPEFAJw8LU');
 const favoritesArray = [
   {
     publicID: '0xd8F4d1493ec3b76674856b4c01dF4d337B3df97D',
-    color: '#8E4A49'
+    color: '#8E4A49',
+    icon: 'pets'
   },
   {
     publicID: '0x4d8a1663c0fa4dcd9000c5f72cc4af0dad2884dd',
-    color: '#2B59C3'
+    color: '#2B59C3',
+    icon: 'highlight'
   },
   {
     publicID: '0x52bc44d5378309EE2abF1539BF71dE1b7d7bE3b5',
-    color: '#533A7B'
+    color: '#533A7B',
+    icon: 'audiotrack'
   },
   {
     publicID: '0x002053Fb39b623F7961822c581B0673a9C03De43',
-    color: '#253C78'
-  },
-  {
-    publicID: '0xc3e7f39030093ebebc1f8fd66f63a468ea91d3d9',
-    color: '#D36582'
+    color: '#253C78',
+    icon: 'videogame_asset'
   }
 ];//JSON.parse(localStorage.getItem('favoritesArray')) || [];
 
