@@ -7,6 +7,12 @@ body {
   margin: 0 auto;
 }
 
+.completeTrans {
+    width: 90% !important;
+    height:auto;
+    margin-bottom: 3rem;
+}
+
 .wally {
   width: 50%;
   max-width: 175px;

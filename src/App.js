@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import * as actionTypes from './store/actions';
 import { connect } from 'react-redux';
-import PlusImage from './assets/plus.png';
 import TokenCard from './components/token-card';
 import Wally from './assets/walrus.png';
 import Favorites from './components/favorites';
@@ -12,13 +11,14 @@ const SNOVIO_ADDRESS = '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969';
 
 class App extends Component {
   state = {
-    contractAddress: '',
-    contractSymbol: '',
     passwordForNewKeystore: '',
     passwordForUploadedKeystore: '',
     keyStoreFileUploaded: null,
     transactionAmount: 0,
-    recipientAddress: ''
+    recipientAddress: '',
+    enteredTicker: '',
+    enteredDecimals: '',
+    enteredContractAddress: ''
   };
 
   doStuff() {
@@ -85,6 +85,17 @@ class App extends Component {
   }
 
   render() {
+
+    // (this.state.transactionAmount * this.props.tokenToUsd[(this.props.currentlySelectedToken || {}).name]).toFixed(2) || 'Unknown'
+    let currentDollarValueOfAmountEntered;
+    if (this.state.transactionAmount && this.props.currentlySelectedToken && this.props.tokenToUsd[this.props.currentlySelectedToken.name]) {
+      currentDollarValueOfAmountEntered = this.state.transactionAmount * this.props.tokenToUsd[this.props.currentlySelectedToken.name].toFixed(2);
+    } else if (!this.state.transactionAmount) {
+      currentDollarValueOfAmountEntered = '0';
+    } else if (!this.props.currentlySelectedToken) {
+      currentDollarValueOfAmountEntered = 'Unknown';
+    }
+
     if (this.props.screen === 0) {
       return (
         <div style={{marginTop: 50}}>
@@ -266,28 +277,13 @@ class App extends Component {
                   <label htmlFor="amount">Amount</label>
                 </div>
                 <div className="input-field col s5 m3">
-                  <h5>=
-                    ${(this.state.transactionAmount * this.props.tokenToUsd[this.props.currentlySelectedToken.name]).toFixed(2) || 'Unknown'}
-                    USD</h5>
+                  <h5>= ${currentDollarValueOfAmountEntered} USD</h5>
                 </div>
                 <div className="col m1"></div>
                 <div className="container">
                   <div className="input-field col s7 m7">
                     <p><b>Hey, Wally here!</b> Choose a color to save this ID!</p>
-                    {/*<input*/}
-                    {/*type="color"*/}
-                    {/*id="html5colorpicker"*/}
-                    {/*value="#ffffff"*/}
-                    {/*/>*/}
                   </div>
-                </div>
-              </div>
-              <div className="row" style={{marginLeft: 30}}>
-                <div className="added-tokens">
-                  <h3>Added Tokens</h3>
-                  <p>Dogereum (DGC)</p>
-                  <p>Korth Coin (KRTH)</p>
-                  <p>CSBereum (CSB)</p>
                 </div>
               </div>
               <div className="row formRow">
@@ -303,41 +299,71 @@ class App extends Component {
                     />
                   );
                 })}
-                <div value="other" className="col s3 m1 coinInactive">
-                  <img className="logo circle" src={PlusImage}/>
-                  <p className="center-align description">Other</p>
-                  <p className="center-align"><strong>Trade!</strong></p>
-                </div>
-                <div className="col s3"></div>
-                <div className="col s12 m5">
+                <div className="col s12 m6 valign-wrapper">
                   <div className="row">
+                    <div className="col s12">
+                      <h6>Use Another ECR Token</h6>
+                    </div>
                     <div className="input-field col s6 finalForm">
                       <i className="material-icons prefix">textsms</i>
-                      <input disabled type="text" id="ticker" className="autocomplete"/>
-                      <label htmlFor="ticker">Ticker Lookup</label>
+                      <input
+                        type="text"
+                        id="ticker"
+                        onChange={(event) => this.setState({enteredTicker: event.target.value})}
+                      />
+                      <label htmlFor="ticker">Ticker</label>
                     </div>
                     <div className="input-field col s6 finalForm">
                       <i className="material-icons prefix">zoom_in</i>
-                      <input disabled type="text" id="decimal" placeholder="18"/>
+                      <input
+                        type="number"
+                        id="decimal"
+                        placeholder="18"
+                        onChange={(event) => this.setState({enteredDecimals: Number(event.target.value)})}
+                      />
                       <label htmlFor="decimal">Decimal Places</label>
                     </div>
                     <div className="input-field col s12 finalForm">
                       <i className="material-icons prefix">home</i>
-                      <input disabled type="text" id="address"/>
+                      <input
+                        type="text"
+                        id="address"
+                        onChange={(event) => this.setState({enteredContractAddress: event.target.value})}
+                      />
                       <label htmlFor="address">Contract Address</label>
                     </div>
-                    <div className="col s2"></div>
-                    <div className="col s8 center-align">
+                    <div className="col s12 finalForm center-align">
                       <a
                         className="waves-effect waves-light btn-large"
-                        onClick={() => this.transact(this.props.currentlySelectedToken, this.state.recipientAddress, this.state.transactionAmount)}
+                        onClick={() => this.addNewToken(this.state.enteredContractAddress, this.state.enteredTicker, this.state.enteredDecimals)}
                       >
-                        Complete Transaction
+                        Add ERC20 Token
                       </a>
                     </div>
-                    <div className="col s2"></div>
                   </div>
                 </div>
+              </div>
+            </div>
+            <div className="row formRow">
+              <div className="col s6 center-align">
+                <a
+                  className="waves-effect waves-light btn completeTrans"
+                  onClick={() => this.transact(this.props.currentlySelectedToken, this.state.recipientAddress, this.state.transactionAmount)}
+                >
+                  <h2>Complete Transaction</h2>
+                </a>
+              </div>
+              <div className="col s6 finalForm center-align">
+                <select>
+                  <option default>No Additional ECR's Selected</option>
+                  {this.props.addedTokens.map(token => {
+                    return (
+                      <option key={token.symbol}>
+                        {token.symbol}
+                      </option>
+                    );
+                  })}
+                </select>
               </div>
             </div>
           </form>
@@ -357,7 +383,7 @@ class App extends Component {
     if (token.name === 'Ethereum') {
       rawTransaction = {
         'from': publicKey,
-        'gas': '400000',
+        'gas': '21000',
         'to': recipientAddress,
         'value': amountInEther
       };
@@ -419,12 +445,15 @@ class App extends Component {
     return `UTC--${today}-${publicKey}.json`;
   }
 
-  addNewToken() {
-    console.log(this.state.contractAddress);
-    console.log(this.state.contractSymbol);
-    const contract = this.getERC20Contract(SNOVIO_ADDRESS);
+  addNewToken(address, symbol, decimals) {
+    const contract = this.getERC20Contract(address);
     // change the parameters to the contractAddress and symbol later on.
-    return this.verifyERC20(SNOVIO_ADDRESS, 'SNOV').then((successful) => {
+    return this.verifyERC20(address).then((successful) => {
+      this.props.addNewToken({
+        symbol: symbol,
+        contractAddress: address,
+        decimals: decimals
+      });
       return successful;
     });
   }
@@ -543,7 +572,7 @@ class App extends Component {
     ], address);
   }
 
-  verifyERC20(address, symbol) {
+  verifyERC20(address) {
     const contract = this.getERC20Contract(address);
     return contract.methods.balanceOf(VITALIK_ADDRESS).call().then(() => {
       // just check if calling it doesn't throw any errors
@@ -618,7 +647,8 @@ const mapStateToProps = (state) => {
     tokens: state.tokens,
     tokenBalances: state.tokenBalances,
     tokenToUsd: state.tokenToUsd,
-    currentlySelectedToken: state.currentlySelectedToken
+    currentlySelectedToken: state.currentlySelectedToken,
+    addedTokens: state.addedTokens
   };
 };
 
@@ -646,6 +676,10 @@ const mapDispatchToProps = (dispatch) => {
         name: tokenName,
         balance: balance
       }
+    }),
+    addNewToken: (token) => dispatch({
+      type: actionTypes.ADD_NEW_TOKEN,
+      payload: token
     })
   };
 };

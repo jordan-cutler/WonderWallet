@@ -9,13 +9,13 @@ class TokenCard extends React.Component {
     return (
       <div value={this.props.symbol}
            className={classNames({
-             "col s3 m1": true,
-             "coinInactive": this.props.currentlySelectedToken.name !== this.props.token.name,
-             "coinActive": this.props.currentlySelectedToken.name === this.props.token.name
+             "col s2 m1": true,
+             "coinInactive": !this.props.currentlySelectedToken || (this.props.currentlySelectedToken.name !== this.props.token.name),
+             "coinActive": this.props.currentlySelectedToken && this.props.currentlySelectedToken.name === this.props.token.name
            })}
            onClick={() => this.props.setCurrentlySelectedToken(this.props.token)}
       >
-        <img className="logo circle" src={this.props.image}/>
+        <img className="logoSpec circle" src={this.props.image}/>
         <p
           className="center-align description">{this.props.name}
           ({this.props.symbol})</p>
