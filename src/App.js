@@ -3,11 +3,10 @@ import './App.css';
 import * as actionTypes from './store/actions';
 import { connect } from 'react-redux';
 import TokenCard from './components/token-card';
+import NewTokenCard from './components/new-token-card';
 import Wally from './assets/walrus.png';
 import Favorites from './components/favorites';
-
-const VITALIK_ADDRESS = '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B';
-const SNOVIO_ADDRESS = '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969';
+import WalrusImage from './assets/walrus.png';
 
 class App extends Component {
   state = {
@@ -21,78 +20,15 @@ class App extends Component {
     enteredContractAddress: ''
   };
 
-  doStuff() {
-    const contractAddress = '0xc778417E063141139Fce010982780140Aa0cD5Ab';
-    const wethContract = this.getERC20Contract(contractAddress);
-    const myAddress = '0xd8F4d1493ec3b76674856b4c01dF4d337B3df97D';
-    wethContract.methods.balanceOf(myAddress).call().then(balance => {
-      console.log(balance);
-    });
-
-    // const abi = wethContract.methods.transfer('0x4d8a1663c0fa4dcd9000c5f72cc4af0dad2884dd', this.props.web3.utils.toWei('0.1', 'ether')).encodeABI();
-    // const rawTransaction = {
-    //   "from": this.props.publicKey,
-    //   "gas": "400000",
-    //   "to": contractAddress,
-    //   "value": "0x0",
-    //   "data": abi
-    // };
-    // const signedTransaction = this.props.signTransactionFn(rawTransaction);
-    // console.log(signedTransaction);
-    // signedTransaction.then(transactionObj => {
-    //   this.props.web3.eth.sendSignedTransaction(transactionObj.rawTransaction)
-    //     .on('receipt', (receipt) => {
-    //       console.log(receipt)
-    //     })
-    //     .on('confirmation', (confirmation) => {
-    //       console.log('confirmed',confirmation);
-    //     })
-    //     .on('error', (error) => {
-    //       console.log('error occurred sending transaction', error);
-    //     })
-    // });
-
-
-    const loopringContractAddress = '0x1B923812146bA032db7e99feC891f67624B42895';
-    const loopringContract = this.getERC20Contract(loopringContractAddress);
-    loopringContract.methods.balanceOf(myAddress).call().then(balance => {
-      console.log('balancelrc', balance);
-    });
-    const lrcTransaction = {
-      'from': this.props.publicKey,
-      'gas': '400000',
-      'to': loopringContractAddress,
-      'value': this.props.web3.utils.toWei('0.1', 'ether')
-    };
-    const lrcSignedTransaction = this.props.signTransactionFn(lrcTransaction);
-    console.log(lrcSignedTransaction);
-    lrcSignedTransaction.then(transactionObj => {
-      this.props.web3.eth.sendSignedTransaction(transactionObj.rawTransaction)
-        .on('receipt', (receipt) => {
-          console.log(receipt);
-          loopringContract.methods.balanceOf(myAddress).call().then(balance => {
-            console.log('balancelrc', balance);
-          });
-        })
-        .on('confirmation', (confirmation) => {
-          console.log('confirmed', confirmation);
-        })
-        .on('error', (error) => {
-          console.log('error occurred sending transaction', error);
-        });
-    });
-
-  }
-
   render() {
 
     // (this.state.transactionAmount * this.props.tokenToUsd[(this.props.currentlySelectedToken || {}).name]).toFixed(2) || 'Unknown'
-    let currentDollarValueOfAmountEntered;
+    let currentDollarValueOfAmountEntered = '0';
     if (this.state.transactionAmount && this.props.currentlySelectedToken && this.props.tokenToUsd[this.props.currentlySelectedToken.name]) {
       currentDollarValueOfAmountEntered = this.state.transactionAmount * this.props.tokenToUsd[this.props.currentlySelectedToken.name].toFixed(2);
     } else if (!this.state.transactionAmount) {
       currentDollarValueOfAmountEntered = '0';
-    } else if (!this.props.currentlySelectedToken) {
+    } else if (!this.props.tokenToUsd[this.props.currentlySelectedToken.symbol]) {
       currentDollarValueOfAmountEntered = 'Unknown';
     }
 
@@ -277,7 +213,7 @@ class App extends Component {
                   <label htmlFor="amount">Amount</label>
                 </div>
                 <div className="input-field col s5 m3">
-                  <h5>= ${currentDollarValueOfAmountEntered} USD</h5>
+                  <h5>= {currentDollarValueOfAmountEntered} USD</h5>
                 </div>
                 <div className="col m1"></div>
               </div>
@@ -290,7 +226,17 @@ class App extends Component {
                         name={token.name}
                         symbol={token.symbol}
                         image={token.image}
-                        balance={token.symbol === 'ETH' ? this.props.accountBalance : (this.props.tokenBalances[token.name] / token.decimals)}
+                        balance={token.symbol === 'ETH' ? this.props.accountBalance : (this.props.tokenBalances[token.name] / Math.pow(10, token.decimals))}
+                        token={token}
+                      />
+                    );
+                  })}
+                  {this.props.addedTokens.map(token => {
+                    return (
+                      <NewTokenCard
+                        key={token.symbol}
+                        symbol={token.symbol}
+                        balance={this.props.tokenBalances[token.symbol] / Math.pow(10, token.decimals)}
                         token={token}
                       />
                     );
@@ -358,7 +304,7 @@ class App extends Component {
   }
 
   transact(token, recipientAddress, transactionAmount) {
-    if ((recipientAddress.startsWith('0x') && recipientAddress.length !== 42) || recipientAddress.length !== 40) {
+    if (!((recipientAddress.startsWith('0x') && recipientAddress.length === 42) || recipientAddress.length === 40)) {
       alert('invalid recipient address');
       return;
     }
@@ -431,9 +377,18 @@ class App extends Component {
   }
 
   addNewToken(address, symbol, decimals) {
+    if (!symbol) {
+      alert('Enter the symbol for the token');
+      return;
+    }
+    if (!decimals) decimals = 18;
+    if (!((address.startsWith('0x') && address.length === 42) || address.length === 40)) {
+      alert('Invalid contract address');
+      return;
+    }
     const contract = this.getERC20Contract(address);
     // change the parameters to the contractAddress and symbol later on.
-    return this.verifyERC20AndUpdateBalance(address).then((successful) => {
+    return this.verifyERC20AndUpdateBalance(address, symbol).then((successful) => {
       this.props.addNewToken({
         symbol: symbol,
         contractAddress: address,
@@ -559,10 +514,15 @@ class App extends Component {
 
   verifyERC20AndUpdateBalance(address, symbol) {
     const contract = this.getERC20Contract(address);
+    console.log(this.props.publicKey);
     return contract.methods.balanceOf(this.props.publicKey).call().then((balance) => {
+      console.log(balance);
       this.props.updateTokenBalance(symbol, balance);
+      console.log('bal', this.props.tokenBalances[symbol]);
+      console.log(this.props.tokenBalances);
       return true;
     }).catch(e => {
+      alert('Contract is not an ERC20 Token');
       return false;
     });
   }

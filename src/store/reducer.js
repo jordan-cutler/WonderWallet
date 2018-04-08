@@ -138,7 +138,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         tokenBalances: {
           ...state.tokenBalances,
-          [action.payload.token]: action.payload.balance
+          [action.payload.name]: action.payload.balance
         }
       };
     case actionTypes.UPDATE_TOKENS_TO_USD:
