@@ -280,25 +280,22 @@ class App extends Component {
                   <h5>= ${currentDollarValueOfAmountEntered} USD</h5>
                 </div>
                 <div className="col m1"></div>
-                <div className="container">
-                  <div className="input-field col s7 m7">
-                    <p><b>Hey, Wally here!</b> Choose a color to save this ID!</p>
-                  </div>
-                </div>
               </div>
               <div className="row formRow">
-                {this.props.tokens.map(token => {
-                  return (
-                    <TokenCard
-                      key={token.symbol}
-                      name={token.name}
-                      symbol={token.symbol}
-                      image={token.image}
-                      balance={token.symbol === 'ETH' ? this.props.accountBalance : (this.props.tokenBalances[token.name] / token.decimals)}
-                      token={token}
-                    />
-                  );
-                })}
+                <div className="col s12 m6 row">
+                  {this.props.tokens.map(token => {
+                    return (
+                      <TokenCard
+                        key={token.symbol}
+                        name={token.name}
+                        symbol={token.symbol}
+                        image={token.image}
+                        balance={token.symbol === 'ETH' ? this.props.accountBalance : (this.props.tokenBalances[token.name] / token.decimals)}
+                        token={token}
+                      />
+                    );
+                  })}
+                </div>
                 <div className="col s12 m6 valign-wrapper">
                   <div className="row">
                     <div className="col s12">
@@ -356,13 +353,14 @@ class App extends Component {
               <div className="col s6 finalForm center-align">
                 <select>
                   <option default>No Additional ECR's Selected</option>
-                  {this.props.addedTokens.map(token => {
-                    return (
-                      <option key={token.symbol}>
-                        {token.symbol}
-                      </option>
-                    );
-                  })}
+                  <option>Hello</option>
+                  {/*{this.props.addedTokens.map(token => {*/}
+                  {/*return (*/}
+                  {/*<option key={token.symbol}>*/}
+                  {/*{token.symbol}*/}
+                  {/*</option>*/}
+                  {/*);*/}
+                  {/*})}*/}
                 </select>
               </div>
             </div>
@@ -448,7 +446,7 @@ class App extends Component {
   addNewToken(address, symbol, decimals) {
     const contract = this.getERC20Contract(address);
     // change the parameters to the contractAddress and symbol later on.
-    return this.verifyERC20(address).then((successful) => {
+    return this.verifyERC20AndUpdateBalance(address).then((successful) => {
       this.props.addNewToken({
         symbol: symbol,
         contractAddress: address,
@@ -572,10 +570,10 @@ class App extends Component {
     ], address);
   }
 
-  verifyERC20(address) {
+  verifyERC20AndUpdateBalance(address, symbol) {
     const contract = this.getERC20Contract(address);
-    return contract.methods.balanceOf(VITALIK_ADDRESS).call().then(() => {
-      // just check if calling it doesn't throw any errors
+    return contract.methods.balanceOf(this.props.publicKey).call().then((balance) => {
+      this.props.updateTokenBalance(symbol, balance);
       return true;
     }).catch(e => {
       return false;

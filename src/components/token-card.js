@@ -9,7 +9,7 @@ class TokenCard extends React.Component {
     return (
       <div value={this.props.symbol}
            className={classNames({
-             "col s2 m1": true,
+             "col m2": true,
              "coinInactive": !this.props.currentlySelectedToken || (this.props.currentlySelectedToken.name !== this.props.token.name),
              "coinActive": this.props.currentlySelectedToken && this.props.currentlySelectedToken.name === this.props.token.name
            })}
