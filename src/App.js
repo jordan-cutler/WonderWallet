@@ -288,7 +288,7 @@ class App extends Component {
               </div>
             </div>
             <div className="row formRow">
-              <div className="col s6 center-align">
+              <div className="col s12 center-align">
                 <a
                   className="waves-effect waves-light btn completeTrans"
                   onClick={() => this.transact(this.props.currentlySelectedToken, this.state.recipientAddress, this.state.transactionAmount)}
