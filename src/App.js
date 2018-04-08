@@ -84,16 +84,6 @@ class App extends Component {
   }
 
   render() {
-    // const acc = this.props.web3.eth.accounts.create();
-    // console.log(acc);
-    // console.log(this.props.web3.eth.accounts.create('hello'));
-    console.log(this.state.transactionAmount);
-    console.log('currentlyselected', this.props.currentlySelectedToken);
-    const val = this.props.tokenToUsd[this.props.currentlySelectedToken.name];
-    console.log(val);
-    console.log(this.state.transactionAmount);
-    console.log(this.state.transactionAmount * val);
-    console.log(this.state.transactionAmount * Number(val));
     if (this.props.screen === 0) {
       return (
         <div style={{marginTop: 50}}>
@@ -264,40 +254,27 @@ class App extends Component {
                 <div className="col m1"></div>
               </div>
               <div className="row formRow">
-                <div className="input-field col s6 finalForm">
-                  <div className="switch">
-                    <label>
-                      Do Not Save
-                      <input type="checkbox" />
-                      <span className="lever"></span>
-                      Save
-                    </label>
-                  </div>
-                </div>
-                <div className="input-field col s6 finalForm">
-                  <i className="material-icons prefix">color_lens</i>
-                  <input disabled type="text" id="color" placeholder="18"/>
-                  <label htmlFor="color">Color (Hex)</label>
-                </div>
-              </div>
-              <div className="row formRow">
                 <div className="col m1"></div>
                 <div className="input-field col s7 m7">
                   <i className="material-icons prefix">local_atm</i>
-                  <textarea id="amount" className="materialize-textarea" onChange={(event) => this.setState({transactionAmount: event.target.value || Number('0')})}></textarea>
+                  <textarea id="amount" className="materialize-textarea" onChange={(event) => this.setState({transactionAmount: event.target.value})}></textarea>
                   <label htmlFor="amount">Amount</label>
                 </div>
                 <div className="input-field col s5 m3">
                   <h5>= ${(this.state.transactionAmount * this.props.tokenToUsd[this.props.currentlySelectedToken.name]).toFixed(2) || 'Unknown'} USD</h5>
                 </div>
                 <div className="col m1"></div>
+                <div className="input-field col s7 m7" style={{paddingLeft: 30, paddingBottom: 20}}>
+
+                  <p><b>Hey, Wally here!</b> Choose a color to save this ID!</p>
+                  <input type="color" id="html5colorpicker" onChange="clickColor(0, -1, -1, 5)" value="#ffffff" />
+                </div>
               </div>
             </div>
             <div className="row formRow">
               {this.props.tokens.map(token => {
                 return (
                   <TokenCard
-                    key={token.symbol}
                     name={token.name}
                     symbol={token.symbol}
                     image={token.image}
