@@ -8,6 +8,7 @@ import EOSImage from '../assets/eos.png';
 import SnovioImage from '../assets/snovio.png';
 import WethImage from '../assets/weth.png';
 import LoopringImage from '../assets/loopring.png';
+
 let web3 = new Web3('https://mainnet.infura.io/4VagvCAdkEkPEFAJw8LU');
 
 const favoritesArray = [
@@ -87,7 +88,8 @@ const initialState = {
   accountBalance: '',
   signTransactionFn: null,
   tokens: defaultTokens,
-  tokenBalances: constants.tokenBalances
+  tokenBalances: constants.tokenBalances,
+  ethUsdValue: 380
 };
 
 const reducer = (state = initialState, action) => {
@@ -134,6 +136,11 @@ const reducer = (state = initialState, action) => {
           ...state.tokenBalances,
           [action.payload.token]: action.payload.balance
         }
+      };
+    case actionTypes.UPDATE_ETH_TO_USD:
+      return {
+        ...state,
+        ethUsdValue: action.payload
       };
     default:
       return state;
