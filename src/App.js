@@ -9,11 +9,35 @@ import PlusImage from './assets/plus.png';
 import SnovioImage from './assets/snovio.png';
 import WethImage from './assets/weth.png';
 import LoopringImage from './assets/loopring.png';
+import Favorites from './components/favorites.js'
 import * as constants from './store/constants';
 import Wally from './assets/walrus.png';
 
 const VITALIK_ADDRESS = '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B';
 const SNOVIO_ADDRESS = '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969';
+
+const favoritesArray = [
+  {
+    publicID: "0xb8f1713a4a1b4d64b66b1785108c8d2b200441b370278cd2fedb38de8e8b2f90 ",
+    color: '#8E4A49',
+  },
+  {
+    publicID: "0xb8f1713a4a1b4d64b66b1785108c8d2b200441b370278cd2fedb38de8e8b2f90 ",
+    color: '#2B59C3',
+  },
+  {
+    publicID: "0xb8f1713a4a1b4d64b66b1785108c8d2b200441b370278cd2fedb38de8e8b2f90 ",
+    color: '#533A7B',
+  },
+  {
+    publicID: "0xb8f1713a4a1b4d64b66b1785108c8d2b200441b370278cd2fedb38de8e8b2f90 ",
+    color: '#253C78',
+  },
+  {
+    publicID: "0xb8f1713a4a1b4d64b66b1785108c8d2b200441b370278cd2fedb38de8e8b2f90 ",
+    color: '#D36582',
+  },
+];
 
 class App extends Component {
   state = {
@@ -55,16 +79,7 @@ class App extends Component {
     //     })
     // });
 
-    const favoritesArray = [
-      {
-        publicID: "1233456",
-        color: "#000"
-      },
-      {
-        publicID: "1233456",
-        color: "#000"
-      },
-    ]
+
 
     const loopringContractAddress = '0x1B923812146bA032db7e99feC891f67624B42895';
     const loopringContract = this.getERC20Contract(loopringContractAddress);
