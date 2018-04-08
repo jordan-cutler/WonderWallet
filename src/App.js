@@ -260,19 +260,8 @@ class App extends Component {
               </div>
               <div className="row formRow">
                 <div className="input-field col s6 finalForm">
-                  <div class="switch">
-                    <label>
-                      Do Not Save
-                      <input type="checkbox" />
-                      <span class="lever"></span>
-                      Save
-                    </label>
-                  </div>
-                </div>
-                <div className="input-field col s6 finalForm">
-                  <i className="material-icons prefix">color_lens</i>
-                  <input disabled type="text" id="color" placeholder="18"/>
-                  <label htmlFor="color">Color (Hex)</label>
+                  <p><b>Hey, Wally here.</b> Want to save this contact? Choose a color.</p>
+                  <input type="color" onchange="clickColor(0, -1, -1, 5)" value="#ffffff" style="width:85%; max-width: 200px" />
                 </div>
               </div>
               <div className="row formRow">
