@@ -3,7 +3,8 @@ body {
 }
 
 .friendRow {
-    margin-bottom: 0px;
+  width: 85%;
+  margin: 0 auto;
 }
 
 .wally {
