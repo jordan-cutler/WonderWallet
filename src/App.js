@@ -88,7 +88,12 @@ class App extends Component {
     // console.log(acc);
     // console.log(this.props.web3.eth.accounts.create('hello'));
     console.log(this.state.transactionAmount);
-    console.log('usdval', this.props.ethUsdValue);
+    console.log('currentlyselected', this.props.currentlySelectedToken);
+    const val = this.props.tokenToUsd[this.props.currentlySelectedToken.name];
+    console.log(val);
+    console.log(this.state.transactionAmount);
+    console.log(this.state.transactionAmount * val);
+    console.log(this.state.transactionAmount * Number(val));
     if (this.props.screen === 0) {
       return (
         <div style={{marginTop: 50}}>
@@ -236,7 +241,7 @@ class App extends Component {
             </div>
             <div className="col s12 m6">
               <h6><strong><b>Current Balance:</b></strong></h6>
-              <h6>{this.props.accountBalance} ETH | {(this.props.accountBalance * this.props.ethUsdValue).toFixed(2)} USD</h6>
+              <h6>{this.props.accountBalance} ETH | {(this.props.accountBalance * this.props.tokenToUsd['Ethereum']).toFixed(2)} USD</h6>
             </div>
           </div>
 
@@ -260,11 +265,11 @@ class App extends Component {
               </div>
               <div className="row formRow">
                 <div className="input-field col s6 finalForm">
-                  <div class="switch">
+                  <div className="switch">
                     <label>
                       Do Not Save
                       <input type="checkbox" />
-                      <span class="lever"></span>
+                      <span className="lever"></span>
                       Save
                     </label>
                   </div>
@@ -283,7 +288,7 @@ class App extends Component {
                   <label htmlFor="amount">Amount</label>
                 </div>
                 <div className="input-field col s5 m3">
-                  <h5>= ${(this.state.transactionAmount * this.props.ethUsdValue)} USD</h5>
+                  <h5>= ${(this.state.transactionAmount * this.props.tokenToUsd[this.props.currentlySelectedToken.name]).toFixed(2) || 'Unknown'} USD</h5>
                 </div>
                 <div className="col m1"></div>
               </div>
@@ -297,6 +302,7 @@ class App extends Component {
                     symbol={token.symbol}
                     image={token.image}
                     balance={token.symbol === 'ETH' ? this.props.accountBalance : (this.props.tokenBalances[token.name] / token.decimals)}
+                    token={token}
                   />
                 );
               })}
@@ -563,7 +569,8 @@ const mapStateToProps = (state) => {
     signTransactionFn: state.signTransactionFn,
     tokens: state.tokens,
     tokenBalances: state.tokenBalances,
-    ethUsdValue: state.ethUsdValue
+    tokenToUsd: state.tokenToUsd,
+    currentlySelectedToken: state.currentlySelectedToken
   };
 };
 

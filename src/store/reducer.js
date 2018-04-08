@@ -89,7 +89,8 @@ const initialState = {
   signTransactionFn: null,
   tokens: defaultTokens,
   tokenBalances: constants.tokenBalances,
-  ethUsdValue: 380
+  tokenToUsd: {},
+  currentlySelectedToken: defaultTokens[0]
 };
 
 const reducer = (state = initialState, action) => {
@@ -137,10 +138,15 @@ const reducer = (state = initialState, action) => {
           [action.payload.token]: action.payload.balance
         }
       };
-    case actionTypes.UPDATE_ETH_TO_USD:
+    case actionTypes.UPDATE_TOKENS_TO_USD:
       return {
         ...state,
-        ethUsdValue: action.payload
+        tokenToUsd: action.payload
+      };
+    case actionTypes.UPDATE_CURRENTLY_SELECTED_TOKEN:
+      return {
+        ...state,
+        currentlySelectedToken: action.payload
       };
     default:
       return state;
