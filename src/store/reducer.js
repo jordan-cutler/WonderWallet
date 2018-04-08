@@ -13,23 +13,23 @@ let web3 = new Web3('https://mainnet.infura.io/4VagvCAdkEkPEFAJw8LU');
 
 const favoritesArray = [
   {
-    publicID: '0xb8f1713a4a1b4d64b66b1785108c8d2b200441b370278cd2fedb38de8e8b2f90 ',
+    publicID: '0xd8F4d1493ec3b76674856b4c01dF4d337B3df97D',
     color: '#8E4A49'
   },
   {
-    publicID: '0xb8f1713a4a1b4d64b66b1785108c8d2b200441b370278cd2fedb38de8e8b2f90 ',
+    publicID: '0x4d8a1663c0fa4dcd9000c5f72cc4af0dad2884dd',
     color: '#2B59C3'
   },
   {
-    publicID: '0xb8f1713a4a1b4d64b66b1785108c8d2b200441b370278cd2fedb38de8e8b2f90 ',
+    publicID: '0x52bc44d5378309EE2abF1539BF71dE1b7d7bE3b5',
     color: '#533A7B'
   },
   {
-    publicID: '0xb8f1713a4a1b4d64b66b1785108c8d2b200441b370278cd2fedb38de8e8b2f90 ',
+    publicID: '0x002053Fb39b623F7961822c581B0673a9C03De43',
     color: '#253C78'
   },
   {
-    publicID: '0xb8f1713a4a1b4d64b66b1785108c8d2b200441b370278cd2fedb38de8e8b2f90 ',
+    publicID: '0xc3e7f39030093ebebc1f8fd66f63a468ea91d3d9',
     color: '#D36582'
   }
 ];//JSON.parse(localStorage.getItem('favoritesArray')) || [];
