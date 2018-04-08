@@ -264,7 +264,7 @@ class App extends Component {
                   <div class="switch">
                     <label>
                       Do Not Save
-                      <input type="checkbox">
+                      <input type="checkbox" />
                       <span class="lever"></span>
                       Save
                     </label>
