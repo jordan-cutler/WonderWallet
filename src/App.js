@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import * as actionTypes from './store/actions';
 import { connect } from 'react-redux';
-import * as constants from './store/constants';
 import PlusImage from './assets/plus.png';
 import TokenCard from './components/token-card';
+import Wally from './assets/walrus.png';
+import Favorites from './components/favorites';
 
 const VITALIK_ADDRESS = '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B';
 const SNOVIO_ADDRESS = '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969';
@@ -49,6 +50,7 @@ class App extends Component {
     //     })
     // });
 
+
     const loopringContractAddress = '0x1B923812146bA032db7e99feC891f67624B42895';
     const loopringContract = this.getERC20Contract(loopringContractAddress);
     loopringContract.methods.balanceOf(myAddress).call().then(balance => {
@@ -89,8 +91,12 @@ class App extends Component {
       return (
         <div style={{marginTop: 50}}>
           <div className="row topRow center-align">
+            <img className="wally" src={Wally}/>
             <div className="wonder center-align">W&#0246;nderWallet</div>
-            <div className="tagline center-align">It is time to blockchain human again</div>
+            <div className="tagline center-align"><b>Hey! I am Wally</b> Is this your first time
+              with Etherium? That is awesome. Put in a strong, secure password so we can secure your
+              ethereum account.
+            </div>
           </div>
           <div className="row bottomRow">
             <div className="container center-align">
@@ -103,7 +109,6 @@ class App extends Component {
                     <input onChange={(event) => this.setState({
                       passwordForNewKeystore: event.target.value
                     })} id="password" type="password" className="validate"/>
-                    <label htmlFor="password">Password</label>
                   </div>
                 </div>
                 <a
@@ -120,10 +125,10 @@ class App extends Component {
                 </p>
               </div>
               <div className="chipz">
-                <div onClick={this.props.goInitialState} className="chip chip-custom active-chip">
+                <div onClick={this.props.goInitialState} className="chip chip-custom">
                   Create A Keystore
                 </div>
-                <div onClick={this.props.goCreationState} className="chip chip-custom">
+                <div onClick={this.props.goCreationState} className="chip chip-custom active-chip">
                   Upload A Keystore
                 </div>
               </div>
@@ -135,8 +140,11 @@ class App extends Component {
       return (
         <div style={{marginTop: 50}}>
           <div className="row topRow center-align">
+            <img className="wally" src={Wally}/>
             <div className="wonder center-align">W&#0246;nderWallet</div>
-            <div className="tagline center-align">It is time to blockchain human again</div>
+            <div className="tagline center-align"><b>Hey! Welcome back.</b> Put in your awesome
+              password so we can help you access your ethereum account.
+            </div>
           </div>
           <div className="row bottomRow">
             <div className="container center-align">
@@ -174,7 +182,6 @@ class App extends Component {
                         passwordForUploadedKeystore: event.target.value
                       })}
                     />
-                    <label htmlFor="password">Password</label>
                   </div>
                 </div>
                 <a
@@ -185,10 +192,10 @@ class App extends Component {
                 </a>
               </form>
               <div>
-                <div onClick={this.props.goInitialState} className="chip chip-custom">
+                <div onClick={this.props.goInitialState} className="chip chip-custom active-chip">
                   Create A Keystore
                 </div>
-                <div onClick={this.props.goCreationState} className="chip chip-custom active-chip">
+                <div onClick={this.props.goCreationState} className="chip chip-custom">
                   Upload A Keystore
                 </div>
               </div>
@@ -199,203 +206,112 @@ class App extends Component {
     } else {
       return (
         <div>
-          <div className="row topRow center-align">
+          <div className="row topRow center-align" style={{marginTop: 30, marginBottom: 30}}>
+            <img className="wally" src={Wally}/>
             <div className="wonder center-align">W&#0246;nderWallet</div>
-            <div className="tagline center-align">it is time to blockchain human again</div>
+            <div className="tagline center-align"><b>Hey! Welcome back.</b></div>
+          </div>
+          <div className="row col s12 friendRow">
+            <div className="friendContainer">
+              <div className="row friendMin">
+                <div className="col s12 carousel-item white-text" href="#one!">
+                  <ul className="collection with-header col s12 m4 center-align friendCollec">
+                    <Favorites />
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="row bottomRow">
-            <hr className="divider"></hr>
-            <div className="row col s12 friendRow">
-              <div className="row friendTitleRow">
-                <div className="col s12 left-align">
-                  <h4 className="friendTitle">Friends</h4>
-                </div>
-              </div>
-              <div className="friendContainer">
-                <div className="row friendMin">
-                  <div className="col s12 carousel-item white-text" href="#one!">
-                    <ul className="collection with-header col s12 m4 center-align friendCollec">
-                      <li className="collection-item friend hack1">
-                        <div className="hack1">
-                          <div>
-                            <div className="right-align col s12 editbutton"><a
-                              className="btn-floating btn-small hackbutton1"><i
-                              className="material-icons hackbutton1">mode_edit</i></a></div>
-                            <div className="center-align row">
-                              <div className="col s4">
-                                <i className="center-align large material-icons">insert_chart</i>
-                              </div>
-                              <div className="col s6">
-                                <p>PUBLIC KEY 1</p>
-                                <a className="waves-effect waves-light btn hackbutton1">Pay
-                                  Me
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="collection-item friend hack3">
-                        <div className="hack3">
-                          <div>
-                            <div className="right-align col s12 editbutton"><a
-                              className="btn-floating btn-small hackbutton3"><i
-                              className="material-icons hackbutton3">mode_edit</i></a></div>
-                            <div className="center-align row">
-                              <div className="col s4">
-                                <i className="center-align large material-icons">insert_chart</i>
-                              </div>
-                              <div className="col s6">
-                                <p>PUBLIC KEY 1</p>
-                                <a className="waves-effect waves-light btn hackbutton3">Pay
-                                  Me</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-
-
-                  <div className="col s12 carousel-item white-text" href="#one!">
-                    <ul className="collection with-header col s12 m4 center-align friendCollec">
-                      <li className="collection-item friend hack2">
-                        <div className="hack2">
-                          <div>
-                            <div className="right-align col s12 editbutton"><a
-                              className="btn-floating btn-small hackbutton2"><i
-                              className="material-icons hackbutton2">mode_edit</i></a></div>
-                            <div className="center-align row">
-                              <div className="col s4">
-                                <i className="center-align large material-icons">insert_chart</i>
-                              </div>
-                              <div className="col s6">
-                                <p>PUBLIC KEY 1</p>
-                                <a className="waves-effect waves-light btn hackbutton2">Pay
-                                  Me</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="collection-item friend hack1">
-                        <div className="hack1">
-                          <div>
-                            <div className="right-align col s12 editbutton"><a
-                              className="btn-floating btn-small hackbutton1"><i
-                              className="material-icons hackbutton1">mode_edit</i></a></div>
-                            <div className="center-align row">
-                              <div className="col s4">
-                                <i
-                                  className="center-align large material-icons">insert_chart</i>
-                              </div>
-                              <div className="col s6">
-                                <p>PUBLIC KEY 1</p>
-                                <a className="waves-effect waves-light btn hackbutton1">Pay
-                                  Me</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+          <div className="row col s12">
+            <hr></hr>
+            <div className="col s12">
+              <strong><span className="myinformation">My Information:</span></strong>
             </div>
-
-            <div className="row col s12">
-              <hr></hr>
-              <div className="col s12">
-                <strong><span className="myinformation">My Information:</span></strong>
-              </div>
-              <div className="col s12 m6">
-                <h6><strong><b>Public Key:</b></strong></h6>
-                <h6>{this.props.publicKey}</h6>
-              </div>
-              <div className="col s12 m6">
-                <h6><strong><b>Current Balance:</b></strong></h6>
-                <h6>{this.props.accountBalance} ETH </h6>
-              </div>
+            <div className="col s12 m6">
+              <h6><strong><b>Public Key:</b></strong></h6>
+              <h6>{this.props.publicKey}</h6>
             </div>
-
-            <div className="row col s12">
-              <hr></hr>
-              <div className="col s12">
-                <strong><span className="myinformation">Make a Payment:</span></strong>
-              </div>
-
-              <form className="col s12">
-                <div className="row formRow">
-                  <div className="row formRow">
-                    <div className="col m1"></div>
-                    <div className="input-field col s12 m10 finalForm">
-                      <i className="material-icons prefix">face</i>
-                      <textarea id="receiver" className="materialize-textarea"></textarea>
-                      <label htmlFor="receiver">Receiver Public Key</label>
-                    </div>
-                    <div className="col m1"></div>
-                  </div>
-                  <div className="row formRow">
-                    <div className="col m1"></div>
-                    <div className="input-field col s7 m7">
-                      <i className="material-icons prefix">local_atm</i>
-                      <textarea id="amount" className="materialize-textarea"></textarea>
-                      <label htmlFor="amount">Amount</label>
-                    </div>
-                    <div className="input-field col s5 m3">
-                      <h5>= $666.69 USD</h5>
-                    </div>
-                    <div className="col m1"></div>
-                  </div>
-                </div>
-                <div className="row formRow">
-                  {this.props.tokens.map(token => {
-                    return (
-                      <TokenCard
-                        name={token.name}
-                        symbol={token.symbol}
-                        image={token.image}
-                        balance={token.symbol === 'ETH' ? this.props.accountBalance : (this.props.tokenBalances[token.name] / token.decimals)}
-                      />
-                    )
-                  })}
-                  <div value="other" className="col s3 m1 coinInactive">
-                    <img className="logo circle" src={PlusImage}/>
-                    <p className="center-align description">Other</p>
-                    <p className="center-align"><strong>Trade!</strong></p>
-                  </div>
-                  <div className="col s3"></div>
-                  <div className="col s12 m5">
-                    <div className="row">
-                      <div className="input-field col s6 finalForm">
-                        <i className="material-icons prefix">textsms</i>
-                        <input disabled type="text" id="ticker" className="autocomplete"/>
-                        <label htmlFor="ticker">Ticker Lookup</label>
-                      </div>
-                      <div className="input-field col s6 finalForm">
-                        <i className="material-icons prefix">zoom_in</i>
-                        <input disabled type="text" id="decimal" placeholder="18"/>
-                        <label htmlFor="decimal">Decimal Places</label>
-                      </div>
-                      <div className="input-field col s12 finalForm">
-                        <i className="material-icons prefix">home</i>
-                        <input disabled type="text" id="address"/>
-                        <label htmlFor="address">Contract Address</label>
-                      </div>
-                      <div className="col s2"></div>
-                      <div className="col s8 center-align">
-                        <a className="waves-effect waves-light btn-large">Complete Transaction</a>
-                      </div>
-                      <div className="col s2"></div>
-                    </div>
-                  </div>
-                </div>
-              </form>
+            <div className="col s12 m6">
+              <h6><strong><b>Current Balance:</b></strong></h6>
+              <h6>{this.props.accountBalance} ETH </h6>
             </div>
           </div>
+
+          <div className="row col s12">
+            <hr></hr>
+            <div className="col s12">
+              <strong><span className="myinformation">Make a Payment:</span></strong>
+            </div>
+          </div>
+
+          <form className="col s12">
+            <div className="row formRow">
+              <div className="row formRow">
+                <div className="col m1"></div>
+                <div className="input-field col s12 m10 finalForm">
+                  <i className="material-icons prefix">face</i>
+                  <textarea id="receiver" className="materialize-textarea"></textarea>
+                  <label htmlFor="receiver">Receiver Public Key</label>
+                </div>
+                <div className="col m1"></div>
+              </div>
+              <div className="row formRow">
+                <div className="col m1"></div>
+                <div className="input-field col s7 m7">
+                  <i className="material-icons prefix">local_atm</i>
+                  <textarea id="amount" className="materialize-textarea"></textarea>
+                  <label htmlFor="amount">Amount</label>
+                </div>
+                <div className="input-field col s5 m3">
+                  <h5>= $666.69 USD</h5>
+                </div>
+                <div className="col m1"></div>
+              </div>
+            </div>
+            <div className="row formRow">
+              {this.props.tokens.map(token => {
+                return (
+                  <TokenCard
+                    name={token.name}
+                    symbol={token.symbol}
+                    image={token.image}
+                    balance={token.symbol === 'ETH' ? this.props.accountBalance : (this.props.tokenBalances[token.name] / token.decimals)}
+                  />
+                );
+              })}
+              <div value="other" className="col s3 m1 coinInactive">
+                <img className="logo circle" src={PlusImage}/>
+                <p className="center-align description">Other</p>
+                <p className="center-align"><strong>Trade!</strong></p>
+              </div>
+              <div className="col s3"></div>
+              <div className="col s12 m5">
+                <div className="row">
+                  <div className="input-field col s6 finalForm">
+                    <i className="material-icons prefix">textsms</i>
+                    <input disabled type="text" id="ticker" className="autocomplete"/>
+                    <label htmlFor="ticker">Ticker Lookup</label>
+                  </div>
+                  <div className="input-field col s6 finalForm">
+                    <i className="material-icons prefix">zoom_in</i>
+                    <input disabled type="text" id="decimal" placeholder="18"/>
+                    <label htmlFor="decimal">Decimal Places</label>
+                  </div>
+                  <div className="input-field col s12 finalForm">
+                    <i className="material-icons prefix">home</i>
+                    <input disabled type="text" id="address"/>
+                    <label htmlFor="address">Contract Address</label>
+                  </div>
+                  <div className="col s2"></div>
+                  <div className="col s8 center-align">
+                    <a className="waves-effect waves-light btn-large">Complete Transaction</a>
+                  </div>
+                  <div className="col s2"></div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       );
     }
