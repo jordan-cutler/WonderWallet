@@ -89,6 +89,7 @@ body {
     margin-top: 0px;
 }
 
+/*
 .hack1, .hack2, .hack3, .hack4 {
     color:white;
     padding:5px 3px 5px 3px !important;
@@ -139,6 +140,7 @@ body {
 .hackbutton4 {
     color:#77dd77 !important;
 }
+*/
 
 
 .edit {
@@ -161,6 +163,7 @@ ul::-webkit-scrollbar-thumb {
     background-color: darkgrey !important;
     outline: 1px solid slategrey !important;
 }
+
 
 .active-chip {
     background-color: #000;
