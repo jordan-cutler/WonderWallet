@@ -190,10 +190,10 @@ class App extends Component {
                 </a>
               </form>
               <div>
-                <div onClick={this.goInitialState} className="chip chip-custom">
+                <div onClick={this.props.goInitialState} className="chip chip-custom">
                   Create A Keystore
                 </div>
-                <div className="chip chip-custom active-chip">
+                <div onClick={this.props.goCreationState} className="chip chip-custom active-chip">
                   Upload A Keystore
                 </div>
               </div>
