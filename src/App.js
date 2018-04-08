@@ -87,7 +87,8 @@ class App extends Component {
     // const acc = this.props.web3.eth.accounts.create();
     // console.log(acc);
     // console.log(this.props.web3.eth.accounts.create('hello'));
-
+    console.log(this.state.transactionAmount);
+    console.log('usdval', this.props.ethUsdValue);
     if (this.props.screen === 0) {
       return (
         <div style={{marginTop: 50}}>
@@ -261,11 +262,11 @@ class App extends Component {
                 <div className="col m1"></div>
                 <div className="input-field col s7 m7">
                   <i className="material-icons prefix">local_atm</i>
-                  <textarea id="amount" className="materialize-textarea" onChange={(event) => this.setState({transactionAmount: event.target.value})}></textarea>
+                  <textarea id="amount" className="materialize-textarea" onChange={(event) => this.setState({transactionAmount: event.target.value || Number('0')})}></textarea>
                   <label htmlFor="amount">Amount</label>
                 </div>
                 <div className="input-field col s5 m3">
-                  <h5>= ${this.state.transactionAmount * this.props.ethUsdValue} USD</h5>
+                  <h5>= ${(this.state.transactionAmount * this.props.ethUsdValue)} USD</h5>
                 </div>
                 <div className="col m1"></div>
               </div>
@@ -542,7 +543,8 @@ const mapStateToProps = (state) => {
     accountBalance: state.accountBalance,
     signTransactionFn: state.signTransactionFn,
     tokens: state.tokens,
-    tokenBalances: state.tokenBalances
+    tokenBalances: state.tokenBalances,
+    ethUsdValue: state.ethUsdValue
   };
 };
 
