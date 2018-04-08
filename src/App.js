@@ -271,6 +271,14 @@ class App extends Component {
                 </div>
               </div>
             </div>
+            <div className="row">
+              <div className="added-tokens">
+                <h3>Added Tokens</h3>
+                <p>Dogereum (DGC)</p>
+                <p>Korth Coin  (KRTH)</p>
+                <p>CSBereum  (CSB)</p>
+              </div>
+            </div>
             <div className="row formRow">
               {this.props.tokens.map(token => {
                 return (
@@ -283,11 +291,6 @@ class App extends Component {
                   />
                 );
               })}
-              <div className="added-tokens">
-                <p>Dogereum (DGC)</p>
-                <p>Korth Coin  (KRTH)</p>
-                <p>CSBereum  (CSB)</p>
-              </div>
               <div value="other" className="col s3 m1 coinInactive">
                 <img className="logo circle" src={PlusImage}/>
                 <p className="center-align description">Other</p>
