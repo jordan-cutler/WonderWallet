@@ -358,39 +358,39 @@ class App extends Component {
                 </div>
                 <div className="row formRow">
                   <div value={this.props.tokens[constants.tokenIndices["Ethereum"]].symbol} className="col s3 m1 coinActive">
-                    <p></p>
                     <img className="logoSpec circle" src={EthereumImage}/>
                     <p className="center-align description">{this.props.tokens[constants.tokenIndices["Ethereum"]].name} ({this.props.tokens[constants.tokenIndices["Ethereum"]].symbol})</p>
+                    <p className="center-align"><strong>{this.props.accountBalance}</strong></p>
                   </div>
                   <div value={this.props.tokens[constants.tokenIndices["AppCoin"]].symbol} className="col s3 m1 coinInactive">
-                    <p></p>
                     <img className="logo circle" src={AppCoinImage}/>
                     <p className="center-align description">{this.props.tokens[constants.tokenIndices["AppCoin"]].name} ({this.props.tokens[constants.tokenIndices["AppCoin"]].symbol})</p>
+                    <p className="center-align"><strong>{this.props.tokenBalances["AppCoin"] / this.props.tokens[constants.tokenIndices["AppCoin"]].decimals}</strong></p>
                   </div>
                   <div value={this.props.tokens[constants.tokenIndices["EOS"]].symbol} className="col s3 m1 coinInactive">
-                    <p></p>
                     <img className="logoSpec circle" src={EOSImage}/>
                     <p className="center-align description">{this.props.tokens[constants.tokenIndices["EOS"]].name} ({this.props.tokens[constants.tokenIndices["EOS"]].symbol})</p>
+                    <p className="center-align"><strong>{this.props.tokenBalances["EOS"] / this.props.tokens[constants.tokenIndices["EOS"]].decimals}</strong></p>
                   </div>
                   <div value={this.props.tokens[constants.tokenIndices["Loopring"]].symbol} className="col s3 m1 coinInactive">
-                    <p></p>
                     <img className="logo circle" src={LoopringImage}/>
                     <p className="center-align description">{this.props.tokens[constants.tokenIndices["Loopring"]].name} ({this.props.tokens[constants.tokenIndices["Loopring"]].symbol})</p>
+                    <p className="center-align"><strong>{this.props.tokenBalances["Loopring"] / this.props.tokens[constants.tokenIndices["Loopring"]].decimals}</strong></p>
                   </div>
                   <div value={this.props.tokens[constants.tokenIndices["Snovio"]].symbol} className="col s3 m1 coinInactive">
-                    <p></p>
                     <img className="logo circle" src={SnovioImage}/>
                     <p className="center-align description">{this.props.tokens[constants.tokenIndices["Snovio"]].name} ({this.props.tokens[constants.tokenIndices["Snovio"]].symbol})</p>
+                    <p className="center-align"><strong>{this.props.tokenBalances["Snovio"] / this.props.tokens[constants.tokenIndices["Snovio"]].decimals}</strong></p>
                   </div>
                   <div value={this.props.tokens[constants.tokenIndices["WETH"]].symbol} className="col s3 m1 coinInactive">
-                    <p></p>
                     <img className="logo circle" src={WethImage}/>
                     <p className="center-align description">{this.props.tokens[constants.tokenIndices["WETH"]].name} ({this.props.tokens[constants.tokenIndices["WETH"]].symbol})</p>
+                    <p className="center-align"><strong>{this.props.tokenBalances["WETH"] / this.props.tokens[constants.tokenIndices["WETH"]].decimals}</strong></p>
                   </div>
                   <div value="other" className="col s3 m1 coinInactive">
-                    <p></p>
                     <img className="logo circle" src={PlusImage}/>
                     <p className="center-align description">Other</p>
+                    <p className="center-align"><strong>Trade!</strong></p>
                   </div>
                   <div className="col s3"></div>
                   <div className="col s12 m5">
@@ -444,6 +444,7 @@ class App extends Component {
     element.click();
     document.body.removeChild(element);
     this.setStatePropertiesFromKeystoreThenGoToMainState(keystore);
+    this.updateTokenBalances(keystore.address);
   }
 
   generateFileName(publicKey) {
@@ -601,11 +602,26 @@ class App extends Component {
       console.log(keystore);
       if (keystore) {
         this.setStatePropertiesFromKeystoreThenGoToMainState(keystore);
+        console.log(keystore);
+        console.log(keystore.address);
+        this.updateTokenBalances(keystore.address);
       } else {
         alert('password entered incorrectly');
       }
     };
     reader.readAsText(fileObject);
+  }
+
+  updateTokenBalances(publicKey) {
+    const tokens = this.props.tokens.slice(1);
+    console.log(tokens);
+    console.log(publicKey);
+    tokens.forEach(token => {
+      const contract = this.getERC20Contract(token.contractAddress);
+      contract.methods.balanceOf(publicKey).call().then(balance => {
+        this.props.updateTokenBalance(token.name, balance);
+      });
+    })
   }
 
   setStatePropertiesFromKeystoreThenGoToMainState(keystore) {
@@ -635,7 +651,8 @@ const mapStateToProps = (state) => {
     publicKey: state.publicKey,
     accountBalance: state.accountBalance,
     signTransactionFn: state.signTransactionFn,
-    tokens: state.tokens
+    tokens: state.tokens,
+    tokenBalances: state.tokenBalances
   };
 };
 
@@ -656,6 +673,13 @@ const mapDispatchToProps = (dispatch) => {
     setSignTransactionFunction: (signTransactionFunction) => dispatch({
       type: actionTypes.SET_SIGN_TRANSACTION_FUNCTION,
       payload: signTransactionFunction
+    }),
+    updateTokenBalance: (tokenName, balance) => dispatch({
+      type: actionTypes.UPDATE_ACCOUNT_BALANCE,
+      payload: {
+        name: tokenName,
+        balance: balance
+      }
     })
   };
 };

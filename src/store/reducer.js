@@ -1,8 +1,9 @@
 import Web3 from 'web3';
 import * as states from './states';
 import * as actionTypes from './actions';
+import * as constants from './constants';
 
-let web3 = new Web3('https://rinkeby.infura.io/4VagvCAdkEkPEFAJw8LU');
+let web3 = new Web3('https://mainnet.infura.io/4VagvCAdkEkPEFAJw8LU ');
 
 const favoritesArray = JSON.parse(localStorage.getItem('favoritesArray')) || [];
 
@@ -54,7 +55,8 @@ const initialState = {
   publicKey: '',
   accountBalance: '',
   signTransactionFn: null,
-  tokens: defaultTokens
+  tokens: defaultTokens,
+  tokenBalances: constants.tokenBalances
 };
 
 const reducer = (state = initialState, action) => {
@@ -93,6 +95,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         signTransactionFn: action.payload
+      };
+    case actionTypes.UPDATE_ACCOUNT_BALANCE:
+      return {
+        ...state,
+        tokenBalances: {
+          ...state.tokenBalances,
+          [action.payload.token]: action.payload.balance
+        }
       };
     default:
       return state;
