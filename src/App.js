@@ -214,8 +214,8 @@ class App extends Component {
               <div className="row friendMin">
                 <div className="col s12">
                   <div className="row center-align">
-                    <Favorites />
-                    </div>
+                    <Favorites/>
+                  </div>
                 </div>
               </div>
             </div>
@@ -232,7 +232,9 @@ class App extends Component {
             </div>
             <div className="col s12 m6">
               <h6><strong><b>Current Balance:</b></strong></h6>
-              <h6>{this.props.accountBalance} ETH | {(this.props.accountBalance * this.props.tokenToUsd['Ethereum']).toFixed(2)} USD</h6>
+              <h6>{this.props.accountBalance} ETH
+                | {(this.props.accountBalance * this.props.tokenToUsd['Ethereum']).toFixed(2)}
+                USD</h6>
             </div>
           </div>
 
@@ -249,7 +251,8 @@ class App extends Component {
                 <div className="col m1"></div>
                 <div className="input-field col s12 m10 finalForm">
                   <i className="material-icons prefix">face</i>
-                  <textarea id="receiver" className="materialize-textarea" onChange={(event) => this.setState({recipientAddress: event.target.value})}></textarea>
+                  <textarea id="receiver" className="materialize-textarea"
+                            onChange={(event) => this.setState({recipientAddress: event.target.value})}></textarea>
                   <label htmlFor="receiver">Receiver Public Key</label>
                 </div>
                 <div className="col m1"></div>
@@ -258,79 +261,82 @@ class App extends Component {
                 <div className="col m1"></div>
                 <div className="input-field col s7 m7">
                   <i className="material-icons prefix">local_atm</i>
-                  <textarea id="amount" className="materialize-textarea" onChange={(event) => this.setState({transactionAmount: event.target.value})}></textarea>
+                  <textarea id="amount" className="materialize-textarea"
+                            onChange={(event) => this.setState({transactionAmount: event.target.value})}></textarea>
                   <label htmlFor="amount">Amount</label>
                 </div>
                 <div className="input-field col s5 m3">
-                  <h5>= ${(this.state.transactionAmount * this.props.tokenToUsd[this.props.currentlySelectedToken.name]).toFixed(2) || 'Unknown'} USD</h5>
+                  <h5>=
+                    ${(this.state.transactionAmount * this.props.tokenToUsd[this.props.currentlySelectedToken.name]).toFixed(2) || 'Unknown'}
+                    USD</h5>
                 </div>
                 <div className="col m1"></div>
                 <div className="container">
                   <div className="input-field col s7 m7">
                     <p><b>Hey, Wally here!</b> Choose a color to save this ID!</p>
                     {/*<input*/}
-                      {/*type="color"*/}
-                      {/*id="html5colorpicker"*/}
-                      {/*value="#ffffff"*/}
+                    {/*type="color"*/}
+                    {/*id="html5colorpicker"*/}
+                    {/*value="#ffffff"*/}
                     {/*/>*/}
                   </div>
-              </div>
-            </div>
-            <div className="row" style={{marginLeft: 30}}>
-              <div className="added-tokens">
-                <h3>Added Tokens</h3>
-                <p>Dogereum (DGC)</p>
-                <p>Korth Coin  (KRTH)</p>
-                <p>CSBereum  (CSB)</p>
-              </div>
-            </div>
-            <div className="row formRow">
-              {this.props.tokens.map(token => {
-                return (
-                  <TokenCard
-                    key={token.symbol}
-                    name={token.name}
-                    symbol={token.symbol}
-                    image={token.image}
-                    balance={token.symbol === 'ETH' ? this.props.accountBalance : (this.props.tokenBalances[token.name] / token.decimals)}
-                    token={token}
-                  />
-                );
-              })}
-              <div value="other" className="col s3 m1 coinInactive">
-                <img className="logo circle" src={PlusImage}/>
-                <p className="center-align description">Other</p>
-                <p className="center-align"><strong>Trade!</strong></p>
-              </div>
-              <div className="col s3"></div>
-              <div className="col s12 m5">
-                <div className="row">
-                  <div className="input-field col s6 finalForm">
-                    <i className="material-icons prefix">textsms</i>
-                    <input disabled type="text" id="ticker" className="autocomplete"/>
-                    <label htmlFor="ticker">Ticker Lookup</label>
-                  </div>
-                  <div className="input-field col s6 finalForm">
-                    <i className="material-icons prefix">zoom_in</i>
-                    <input disabled type="text" id="decimal" placeholder="18"/>
-                    <label htmlFor="decimal">Decimal Places</label>
-                  </div>
-                  <div className="input-field col s12 finalForm">
-                    <i className="material-icons prefix">home</i>
-                    <input disabled type="text" id="address"/>
-                    <label htmlFor="address">Contract Address</label>
-                  </div>
-                  <div className="col s2"></div>
-                  <div className="col s8 center-align">
-                    <a
-                      className="waves-effect waves-light btn-large"
-                      onClick={() => this.transact(this.props.currentlySelectedToken, this.state.recipientAddress, this.state.transactionAmount)}
-                    >
-                      Complete Transaction
-                    </a>
-                  </div>
-                  <div className="col s2"></div>
                 </div>
+              </div>
+              <div className="row" style={{marginLeft: 30}}>
+                <div className="added-tokens">
+                  <h3>Added Tokens</h3>
+                  <p>Dogereum (DGC)</p>
+                  <p>Korth Coin (KRTH)</p>
+                  <p>CSBereum (CSB)</p>
+                </div>
+              </div>
+              <div className="row formRow">
+                {this.props.tokens.map(token => {
+                  return (
+                    <TokenCard
+                      key={token.symbol}
+                      name={token.name}
+                      symbol={token.symbol}
+                      image={token.image}
+                      balance={token.symbol === 'ETH' ? this.props.accountBalance : (this.props.tokenBalances[token.name] / token.decimals)}
+                      token={token}
+                    />
+                  );
+                })}
+                <div value="other" className="col s3 m1 coinInactive">
+                  <img className="logo circle" src={PlusImage}/>
+                  <p className="center-align description">Other</p>
+                  <p className="center-align"><strong>Trade!</strong></p>
+                </div>
+                <div className="col s3"></div>
+                <div className="col s12 m5">
+                  <div className="row">
+                    <div className="input-field col s6 finalForm">
+                      <i className="material-icons prefix">textsms</i>
+                      <input disabled type="text" id="ticker" className="autocomplete"/>
+                      <label htmlFor="ticker">Ticker Lookup</label>
+                    </div>
+                    <div className="input-field col s6 finalForm">
+                      <i className="material-icons prefix">zoom_in</i>
+                      <input disabled type="text" id="decimal" placeholder="18"/>
+                      <label htmlFor="decimal">Decimal Places</label>
+                    </div>
+                    <div className="input-field col s12 finalForm">
+                      <i className="material-icons prefix">home</i>
+                      <input disabled type="text" id="address"/>
+                      <label htmlFor="address">Contract Address</label>
+                    </div>
+                    <div className="col s2"></div>
+                    <div className="col s8 center-align">
+                      <a
+                        className="waves-effect waves-light btn-large"
+                        onClick={() => this.transact(this.props.currentlySelectedToken, this.state.recipientAddress, this.state.transactionAmount)}
+                      >
+                        Complete Transaction
+                      </a>
+                    </div>
+                    <div className="col s2"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -341,60 +347,46 @@ class App extends Component {
   }
 
   transact(token, recipientAddress, transactionAmount) {
-    if ((recipientAddress.startsWith("0x") && recipientAddress.length !== 42) || recipientAddress.length !== 40) {
+    if ((recipientAddress.startsWith('0x') && recipientAddress.length !== 42) || recipientAddress.length !== 40) {
       alert('invalid recipient address');
       return;
     }
     const publicKey = this.props.publicKey;
     const amountInEther = this.props.web3.utils.toWei(transactionAmount, 'ether');
+    let rawTransaction;
     if (token.name === 'Ethereum') {
-      const ethTransaction = {
-        "from": publicKey,
-        "gas": "400000",
-        "to": recipientAddress,
-        "value": amountInEther
+      rawTransaction = {
+        'from': publicKey,
+        'gas': '400000',
+        'to': recipientAddress,
+        'value': amountInEther
       };
-
-      const signedTransaction = this.props.signTransactionFn(ethTransaction);
-      signedTransaction.then(transactionObj => {
-        this.props.web3.eth.sendSignedTransaction(transactionObj.rawTransaction)
-          .on('receipt', (receipt) => {
-            console.log(receipt)
-          })
-          .on('confirmation', (confirmation) => {
-            console.log('confirmed',confirmation);
-          })
-          .on('error', (error) => {
-            console.log('error occurred sending transaction', error);
-          })
-      });
     } else {
       const contractAddress = token.contractAddress;
       const contract = this.getERC20Contract(contractAddress);
       const abi = contract.methods.transfer(recipientAddress, amountInEther).encodeABI();
-      const rawTransaction = {
-        "from": publicKey,
-        "gas": "400000",
-        "to": contractAddress,
-        "value": "0x0",
-        "data": abi
+      rawTransaction = {
+        'from': publicKey,
+        'gas': '400000',
+        'to': contractAddress,
+        'value': '0x0',
+        'data': abi
       };
-      const signedTransaction = this.props.signTransactionFn(rawTransaction);
-      console.log(signedTransaction);
-      signedTransaction.then(transactionObj => {
-        this.props.web3.eth.sendSignedTransaction(transactionObj.rawTransaction)
-          .on('receipt', (receipt) => {
-            console.log(receipt)
-          })
-          .on('confirmation', (confirmation) => {
-            console.log('confirmed',confirmation);
-          })
-          .on('error', (error) => {
-            console.log('error occurred sending transaction', error);
-          })
-      });
     }
-
+    const signedTransaction = this.props.signTransactionFn(rawTransaction);
+    console.log(signedTransaction);
+    signedTransaction.then(transactionObj => {
+      this.props.web3.eth.sendSignedTransaction(transactionObj.rawTransaction)
+        .on('receipt', (receipt) => {
+          console.log(receipt);
+        })
+        .on('confirmation', (confirmation) => {
+          console.log('confirmed', confirmation);
+        })
+        .on('error', (error) => {
+          console.log('error occurred sending transaction', error);
+        });
+    });
   }
 
   downloadKeystore(password) {
@@ -410,7 +402,9 @@ class App extends Component {
       password
     );
     //let o = {toString: function(){ return ""}};
-    keystore.toString = function() { return ""};
+    keystore.toString = function() {
+      return '';
+    };
     element.setAttribute('href', URL.createObjectURL(new Blob([JSON.stringify(keystore), {type: 'text/plain'}])));
     element.setAttribute('download', this.generateFileName(acc.address));
     document.body.appendChild(element);
@@ -564,7 +558,7 @@ class App extends Component {
     reader.onload = (e) => {
       // the -15 gets rid of [object Object] at the end of the string. Don't know why it's there
       let json;
-      if (e.target.result.includes("[object Object]")) {
+      if (e.target.result.includes('[object Object]')) {
         json = JSON.parse(e.target.result.substring(0, e.target.result.length - 15));
       } else {
         json = JSON.parse(e.target.result);
