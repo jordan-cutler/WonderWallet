@@ -152,10 +152,10 @@ class App extends Component {
                 </p>
               </div>
               <div className="chipz">
-                <div onClick={this.props.goInitialState} className="chip chip-custom active-chip">
+                <div onClick={this.props.goInitialState} className="chip chip-custom">
                   Create A Keystore
                 </div>
-                <div onClick={this.props.goCreationState} className="chip chip-custom">
+                <div onClick={this.props.goCreationState} className="chip chip-custom active-chip">
                   Upload A Keystore
                 </div>
               </div>
@@ -217,10 +217,10 @@ class App extends Component {
                 </a>
               </form>
               <div>
-                <div onClick={this.props.goInitialState} className="chip chip-custom">
+                <div onClick={this.props.goInitialState} className="chip chip-custom active-chip">
                   Create A Keystore
                 </div>
-                <div onClick={this.props.goCreationState} className="chip chip-custom active-chip">
+                <div onClick={this.props.goCreationState} className="chip chip-custom">
                   Upload A Keystore
                 </div>
               </div>
