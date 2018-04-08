@@ -1,9 +1,10 @@
 {
   "main.css": "static/css/main.c17080f1.css",
   "main.css.map": "static/css/main.c17080f1.css.map",
-  "main.js": "static/js/main.a044f952.js",
-  "main.js.map": "static/js/main.a044f952.js.map",
+  "main.js": "static/js/main.42fc2b15.js",
+  "main.js.map": "static/js/main.42fc2b15.js.map",
   "static/media/appcoins.png": "static/media/appcoins.8e9ae09f.png",
   "static/media/ethereum.png": "static/media/ethereum.b752e1ec.png",
+  "static/media/walrus.png": "static/media/walrus.ec1f6029.png",
   "static/media/weth.png": "static/media/weth.690ff9ab.png"
 }

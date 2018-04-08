@@ -2,8 +2,65 @@ body {
     height: 100vh;
 }
 
+.pastelBlue {
+  border-color:rgb(170, 200, 207);
+  color:rgb(170, 200, 207);
+}
+.pastelGreen {
+  border-color:rgb(120, 220, 120);
+  color:rgb(120, 220, 120);
+}
+.maroon {
+  border-color:rgb(142, 74, 73);
+  color:rgb(142, 74, 73);
+}
+.pastelRed{
+  border-color:rgb(255, 105, 97);
+  color:rgb(255, 105, 97);
+}
+
+.friendGroup {
+  border-width: .3rem;
+  border-style: solid;
+  border-radius:.5rem;
+}
+.publicKey {
+  margin-bottom:.5rem;
+  border:none;
+}
+.friendButton {
+  margin-bottom:.2rem;
+  height:3rem;
+  border-width: .3rem;
+  border-style: solid;
+  border-radius:.5rem;
+  color:inherit;
+  border-color:inherit;
+}
+
+.friendRow {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.completeTrans {
+    width: 90% !important;
+    height:auto;
+    margin-bottom: 3rem;
+}
+
+.wally {
+  width: 50%;
+  max-width: 175px;
+  margin-top: 20px;
+}
+
 .friendTitle {
     margin: .3rem 0rem .3rem 0rem !important;
+}
+
+.friendMin {
+    margin-bottom: .2rem;
 }
 
 .friendTitleRow {
@@ -42,11 +99,13 @@ body {
 .logo {
     background-color:transparent;
     width:100% !important;
+    margin-top: .75rem;
 }
 
 .logoSpec {
     background-color:white;
     width:100% !important;
+    margin-top: .75rem;
 }
 
 .bottomRow {
@@ -73,6 +132,7 @@ body {
     margin-top: 0px;
 }
 
+/*
 .hack1, .hack2, .hack3, .hack4 {
     color:white;
     padding:5px 3px 5px 3px !important;
@@ -123,6 +183,7 @@ body {
 .hackbutton4 {
     color:#77dd77 !important;
 }
+*/
 
 
 .edit {
@@ -145,6 +206,7 @@ ul::-webkit-scrollbar-thumb {
     background-color: darkgrey !important;
     outline: 1px solid slategrey !important;
 }
+
 
 .active-chip {
     background-color: #000;
@@ -188,6 +250,7 @@ ul::-webkit-scrollbar-thumb {
 .description {
     height: 2.5rem;
     font-size: 15px;
+    margin-top: .2rem;
 }
 
 .finalForm {
