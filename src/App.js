@@ -259,6 +259,24 @@ class App extends Component {
                 <div className="col m1"></div>
               </div>
               <div className="row formRow">
+              <div className="row">
+                <div className="input-field col s6 finalForm">
+                  <div class="switch">
+                    <label>
+                      Do Not Save
+                      <input type="checkbox">
+                      <span class="lever"></span>
+                      Save
+                    </label>
+                  </div>
+                </div>
+                <div className="input-field col s6 finalForm">
+                  <i className="material-icons prefix">color_lens</i>
+                  <input disabled type="text" id="color" placeholder="18"/>
+                  <label htmlFor="color">Color (Hex)</label>
+                </div>
+              </div>
+              <div className="row formRow">
                 <div className="col m1"></div>
                 <div className="input-field col s7 m7">
                   <i className="material-icons prefix">local_atm</i>
