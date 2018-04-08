@@ -236,7 +236,7 @@ class App extends Component {
             </div>
             <div className="col s12 m6">
               <h6><strong><b>Current Balance:</b></strong></h6>
-              <h6>{this.props.accountBalance} ETH </h6>
+              <h6>{this.props.accountBalance} ETH | {(this.props.accountBalance * this.props.ethUsdValue).toFixed(2)} USD</h6>
             </div>
           </div>
 
@@ -511,6 +511,8 @@ class App extends Component {
       const contract = this.getERC20Contract(token.contractAddress);
       contract.methods.balanceOf(publicKey).call().then(balance => {
         this.props.updateTokenBalance(token.name, balance);
+      }).catch(err => {
+        this.props.updateTokenBalance(token.name, 0);
       });
     });
   }
