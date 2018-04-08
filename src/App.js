@@ -269,7 +269,7 @@ class App extends Component {
                 <div className="col m1"></div>
                 <div className="input-field col s12 finalForm">
                   <p><b>Hey, Wally here!</b> Choose a color to save this ID!</p>
-                  <input type="color" id="html5colorpicker" onchange="clickColor(0, -1, -1, 5)" value="#ffffff" style="width:85%;">
+                  <input type="color" id="html5colorpicker" onchange="clickColor(0, -1, -1, 5)" value="#ffffff" style="width:85%;" />
                 </div>
               </div>
             </div>
