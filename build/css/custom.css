@@ -155,6 +155,10 @@ ul::-webkit-scrollbar-thumb {
     background-color: #000;
 }
 
+.btn-bottom {
+    margin-bottom: 40px;
+}
+
 .coinActive {
     background-color: black;
     color:white;
