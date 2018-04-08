@@ -215,7 +215,9 @@ class App extends Component {
             <div className="friendContainer">
               <div className="row friendMin">
                 <div className="col s12">
+                  <div className="row center-align">
                     <Favorites />
+                    </div>
                 </div>
               </div>
             </div>
