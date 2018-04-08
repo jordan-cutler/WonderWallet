@@ -350,19 +350,6 @@ class App extends Component {
                   <h2>Complete Transaction</h2>
                 </a>
               </div>
-              <div className="col s6 finalForm center-align">
-                <select>
-                  <option default>No Additional ECR's Selected</option>
-                  <option>Hello</option>
-                  {/*{this.props.addedTokens.map(token => {*/}
-                  {/*return (*/}
-                  {/*<option key={token.symbol}>*/}
-                  {/*{token.symbol}*/}
-                  {/*</option>*/}
-                  {/*);*/}
-                  {/*})}*/}
-                </select>
-              </div>
             </div>
           </form>
         </div>
