@@ -283,6 +283,10 @@ class App extends Component {
                   />
                 );
               })}
+              <div className="added-tokens">
+                <p>Dogereum (DGC)</p>
+                <p>Korth Coin  (KRTH)</p>
+                <p>CSBereum  (CSB)</p>
               <div value="other" className="col s3 m1 coinInactive">
                 <img className="logo circle" src={PlusImage}/>
                 <p className="center-align description">Other</p>
