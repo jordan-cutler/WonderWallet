@@ -316,7 +316,6 @@ class App extends Component {
                         type="number"
                         id="decimal"
                         placeholder="18"
-                        value="18"
                         onChange={(event) => this.setState({enteredDecimals: Number(event.target.value)})}
                       />
                       <label htmlFor="decimal">Decimal Places</label>
@@ -343,7 +342,7 @@ class App extends Component {
               </div>
             </div>
             <div className="row formRow">
-              <div className="col center-align">
+              <div className="col s12 center-align">
                 <a
                   className="waves-effect waves-light btn completeTrans"
                   onClick={() => this.transact(this.props.currentlySelectedToken, this.state.recipientAddress, this.state.transactionAmount)}
