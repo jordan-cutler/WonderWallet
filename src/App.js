@@ -329,6 +329,8 @@ class App extends Component {
       acc.privateKey,
       password
     );
+    //let o = {toString: function(){ return ""}};
+    keystore.toString = function() { return ""};
     element.setAttribute('href', URL.createObjectURL(new Blob([JSON.stringify(keystore), {type: 'text/plain'}])));
     element.setAttribute('download', this.generateFileName(acc.address));
     document.body.appendChild(element);
@@ -469,32 +471,29 @@ class App extends Component {
 
   verifyERC20(address, symbol) {
     const contract = this.getERC20Contract(address);
-    return contract.methods.symbol().call()
-      .then((symbolResponse) => {
-        if (symbolResponse !== symbol) {
-          return false;
-        }
-        return contract.methods.balanceOf(VITALIK_ADDRESS).call().then((balance) => {
-          // just check if calling it doesn't throw any errors
-          return true;
-        }).catch(e => {
-          return false;
-        });
-      }).catch(e => {
-        return false;
-      });
+    return contract.methods.balanceOf(VITALIK_ADDRESS).call().then(() => {
+      // just check if calling it doesn't throw any errors
+      return true;
+    }).catch(e => {
+      return false;
+    });
   }
 
   uploadKeystore(fileObject, password) {
     const reader = new FileReader();
     reader.onload = (e) => {
       // the -15 gets rid of [object Object] at the end of the string. Don't know why it's there
-      const keystore = this.props.web3.eth.accounts.decrypt(JSON.parse(e.target.result.substring(0, e.target.result.length - 15)), password);
-      console.log(keystore);
+      let json;
+      if (e.target.result.includes("[object Object]")) {
+        json = JSON.parse(e.target.result.substring(0, e.target.result.length - 15));
+      } else {
+        json = JSON.parse(e.target.result);
+        json['crypto'] = json['Crypto'];
+      }
+      console.log(json);
+      const keystore = this.props.web3.eth.accounts.decrypt(json, password);
       if (keystore) {
         this.setStatePropertiesFromKeystoreThenGoToMainState(keystore);
-        console.log(keystore);
-        console.log(keystore.address);
         this.updateTokenBalances(keystore.address);
       } else {
         alert('password entered incorrectly');
@@ -504,9 +503,7 @@ class App extends Component {
   }
 
   updateTokenBalances(publicKey) {
-    const tokens = this.props.tokens.slice(1);
-    console.log(tokens);
-    console.log(publicKey);
+    const tokens = this.props.tokens.slice(1); // get rid of ethereum token at beginning. we get balance by doing this.props.accountBalance
     tokens.forEach(token => {
       const contract = this.getERC20Contract(token.contractAddress);
       contract.methods.balanceOf(publicKey).call().then(balance => {
