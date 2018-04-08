@@ -10,6 +10,7 @@ import SnovioImage from './assets/snovio.png';
 import WethImage from './assets/weth.png';
 import LoopringImage from './assets/loopring.png';
 import * as constants from './store/constants';
+import Wally from './walrus.png';
 
 const VITALIK_ADDRESS = '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B';
 const SNOVIO_ADDRESS = '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969';
@@ -94,8 +95,9 @@ class App extends Component {
       return (
         <div style={{marginTop: 50}}>
           <div className="row topRow center-align">
+            <img className="logoSpec" src={Wally}/>
             <div className="wonder center-align">W&#0246;nderWallet</div>
-            <div className="tagline center-align">It is time to blockchain human again</div>
+            <div className="tagline center-align"><b>Hey! I am Wally</b> Is this your first time with Etherium? That is awesome. Put in a strong, secure password so we can secure your ethereum account.</div>
           </div>
           <div className="row bottomRow">
             <div className="container center-align">
@@ -108,7 +110,6 @@ class App extends Component {
                     <input onChange={(event) => this.setState({
                       passwordForNewKeystore: event.target.value
                     })} id="password" type="password" className="validate"/>
-                    <label htmlFor="password">Password</label>
                   </div>
                 </div>
                 <a
@@ -140,8 +141,9 @@ class App extends Component {
       return (
         <div style={{marginTop: 50}}>
           <div className="row topRow center-align">
+            <img className="logoSpec" src={Wally}/>
             <div className="wonder center-align">W&#0246;nderWallet</div>
-            <div className="tagline center-align">It is time to blockchain human again</div>
+            <div className="tagline center-align"><b>Hey! Welcome back.</b> Put in your awesome password so we can help you access your ethereum account.</div>
           </div>
           <div className="row bottomRow">
             <div className="container center-align">
@@ -179,7 +181,6 @@ class App extends Component {
                         passwordForUploadedKeystore: event.target.value
                       })}
                     />
-                    <label htmlFor="password">Password</label>
                   </div>
                 </div>
                 <a
@@ -204,9 +205,10 @@ class App extends Component {
     } else {
       return (
         <div>
-          <div className="row topRow center-align">
+          <div className="row topRow center-align" style={{marginTop: 30, marginBottom: 30}}>
+            <img className="logoSpec" src={Wally}/>
             <div className="wonder center-align">W&#0246;nderWallet</div>
-            <div className="tagline center-align">it is time to blockchain human again</div>
+            <div className="tagline center-align"><b>Hey! Welcome back.</b></div>
           </div>
 
           <div className="row bottomRow">
