@@ -214,10 +214,8 @@ class App extends Component {
           <div className="row col s12 friendRow">
             <div className="friendContainer">
               <div className="row friendMin">
-                <div className="col s12 carousel-item white-text" href="#one!">
-                  <ul className="collection with-header col s12 m4 center-align friendCollec">
+                <div className="col s12">
                     <Favorites />
-                  </ul>
                 </div>
               </div>
             </div>
