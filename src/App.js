@@ -55,6 +55,17 @@ class App extends Component {
     //     })
     // });
 
+    const favoritesArray = [
+      {
+        publicID: "1233456",
+        color: "#000"
+      },
+      {
+        publicID: "1233456",
+        color: "#000"
+      },
+    ]
+
     const loopringContractAddress = '0x1B923812146bA032db7e99feC891f67624B42895';
     const loopringContract = this.getERC20Contract(loopringContractAddress);
     loopringContract.methods.balanceOf(myAddress).call().then(balance => {
