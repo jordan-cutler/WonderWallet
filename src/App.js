@@ -264,7 +264,8 @@ class App extends Component {
                   <h5>= ${(this.state.transactionAmount * this.props.tokenToUsd[this.props.currentlySelectedToken.name]).toFixed(2) || 'Unknown'} USD</h5>
                 </div>
                 <div className="col m1"></div>
-                <div className="input-field col s7 m7" style={{paddingLeft: 30, paddingBottom: 20}}>
+                <div className="container">
+                <div className="input-field col s7 m7">
 
                   <p><b>Hey, Wally here!</b> Choose a color to save this ID!</p>
                   <input type="color" id="html5colorpicker" onChange="clickColor(0, -1, -1, 5)" value="#ffffff" />
@@ -319,6 +320,7 @@ class App extends Component {
                     <a className="waves-effect waves-light btn-large">Complete Transaction</a>
                   </div>
                   <div className="col s2"></div>
+                </div>
                 </div>
               </div>
             </div>
