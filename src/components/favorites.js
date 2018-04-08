@@ -7,10 +7,10 @@ class Favorites extends React.Component {
     return this.props.favoritesArray.map((favorites) => {
       return (
           <div style={{color: favorites.color}}>
-              <div className="row">
-                <div className="col s12">
-                  <i className="center-align large material-icons" style={{color: favorites.color}}>insert_chart</i>
-                  <p>{favorites.publicID}</p>
+              <div className="row center-align">
+                <div className="col s6">
+                  <i className=" large material-icons" style={{color: favorites.color}}>insert_chart</i>
+                  <p className="truncate">{favorites.publicID}</p>
                   <a className="waves-effect btn-flat" style={{color: favorites.color}}>Pay Me</a>
                 </div>
               </div>

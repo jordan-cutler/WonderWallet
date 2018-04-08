@@ -93,7 +93,7 @@ class App extends Component {
           <div className="row topRow center-align">
             <img className="wally" src={Wally}/>
             <div className="wonder center-align">W&#0246;nderWallet</div>
-            <div className="tagline center-align"><b>Hey! I am Wally</b> Is this your first time
+            <div className="tagline center-align"><b>Hey! I am Wally.</b> Is this your first time
               with Etherium? That is awesome. Put in a strong, secure password so we can secure your
               ethereum account.
             </div>
@@ -232,7 +232,7 @@ class App extends Component {
             </div>
             <div className="col s12 m6">
               <h6><strong><b>Current Balance:</b></strong></h6>
-              <h6>{this.props.accountBalance} ETH | {this.props.accountBalance * this.props.ethUsdValue} USD</h6>
+              <h6>{this.props.accountBalance} ETH </h6>
             </div>
           </div>
 
@@ -538,8 +538,7 @@ const mapStateToProps = (state) => {
     accountBalance: state.accountBalance,
     signTransactionFn: state.signTransactionFn,
     tokens: state.tokens,
-    tokenBalances: state.tokenBalances,
-    ethUsdValue: state.ethUsdValue
+    tokenBalances: state.tokenBalances
   };
 };
 
