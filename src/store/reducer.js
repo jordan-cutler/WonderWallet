@@ -9,7 +9,7 @@ import SnovioImage from '../assets/snovio.png';
 import WethImage from '../assets/weth.png';
 import LoopringImage from '../assets/loopring.png';
 
-let web3 = new Web3('https://rinkeby.infura.io/4VagvCAdkEkPEFAJw8LU');
+let web3 = new Web3('https://mainnet.infura.io/4VagvCAdkEkPEFAJw8LU');
 
 const favoritesArray = [
   {

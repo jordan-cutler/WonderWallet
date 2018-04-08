@@ -331,7 +331,6 @@ class App extends Component {
       };
     }
     const signedTransaction = this.props.signTransactionFn(rawTransaction);
-    console.log(signedTransaction);
     signedTransaction.then(transactionObj => {
       this.props.web3.eth.sendSignedTransaction(transactionObj.rawTransaction)
         .on('receipt', (receipt) => {
@@ -358,11 +357,7 @@ class App extends Component {
       acc.privateKey,
       password
     );
-    //let o = {toString: function(){ return ""}};
-    keystore.toString = function() {
-      return '';
-    };
-    element.setAttribute('href', URL.createObjectURL(new Blob([JSON.stringify(keystore), {type: 'text/plain'}])));
+    element.setAttribute('href', 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(keystore)));
     element.setAttribute('download', this.generateFileName(acc.address));
     document.body.appendChild(element);
     element.click();
@@ -514,12 +509,9 @@ class App extends Component {
 
   verifyERC20AndUpdateBalance(address, symbol) {
     const contract = this.getERC20Contract(address);
-    console.log(this.props.publicKey);
+
     return contract.methods.balanceOf(this.props.publicKey).call().then((balance) => {
-      console.log(balance);
       this.props.updateTokenBalance(symbol, balance);
-      console.log('bal', this.props.tokenBalances[symbol]);
-      console.log(this.props.tokenBalances);
       return true;
     }).catch(e => {
       alert('Contract is not an ERC20 Token');
@@ -530,15 +522,7 @@ class App extends Component {
   uploadKeystore(fileObject, password) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      // the -15 gets rid of [object Object] at the end of the string. Don't know why it's there
-      let json;
-      if (e.target.result.includes('[object Object]')) {
-        json = JSON.parse(e.target.result.substring(0, e.target.result.length - 15));
-      } else {
-        json = JSON.parse(e.target.result);
-        json['crypto'] = json['Crypto'];
-      }
-      console.log(json);
+      const json = JSON.parse(e.target.result);
       const keystore = this.props.web3.eth.accounts.decrypt(json, password);
       if (keystore) {
         this.setStatePropertiesFromKeystoreThenGoToMainState(keystore);
