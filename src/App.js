@@ -17,7 +17,8 @@ class App extends Component {
     passwordForNewKeystore: '',
     passwordForUploadedKeystore: '',
     keyStoreFileUploaded: null,
-    transactionAmount: 0
+    transactionAmount: 0,
+    recipientAddress: ''
   };
 
   doStuff() {
@@ -248,7 +249,7 @@ class App extends Component {
                 <div className="col m1"></div>
                 <div className="input-field col s12 m10 finalForm">
                   <i className="material-icons prefix">face</i>
-                  <textarea id="receiver" className="materialize-textarea"></textarea>
+                  <textarea id="receiver" className="materialize-textarea" onChange={(event) => this.setState({recipientAddress: event.target.value})}></textarea>
                   <label htmlFor="receiver">Receiver Public Key</label>
                 </div>
                 <div className="col m1"></div>
@@ -267,7 +268,11 @@ class App extends Component {
                 <div className="container">
                   <div className="input-field col s7 m7">
                     <p><b>Hey, Wally here!</b> Choose a color to save this ID!</p>
-                    <input type="color" id="html5colorpicker" onChange="clickColor(0, -1, -1, 5)" value="#ffffff" />
+                    {/*<input*/}
+                      {/*type="color"*/}
+                      {/*id="html5colorpicker"*/}
+                      {/*value="#ffffff"*/}
+                    {/*/>*/}
                   </div>
               </div>
             </div>
@@ -283,6 +288,7 @@ class App extends Component {
               {this.props.tokens.map(token => {
                 return (
                   <TokenCard
+                    key={token.symbol}
                     name={token.name}
                     symbol={token.symbol}
                     image={token.image}
@@ -316,7 +322,12 @@ class App extends Component {
                   </div>
                   <div className="col s2"></div>
                   <div className="col s8 center-align">
-                    <a className="waves-effect waves-light btn-large">Complete Transaction</a>
+                    <a
+                      className="waves-effect waves-light btn-large"
+                      onClick={() => this.transact(this.props.currentlySelectedToken, this.state.recipientAddress, this.state.transactionAmount)}
+                    >
+                      Complete Transaction
+                    </a>
                   </div>
                   <div className="col s2"></div>
                 </div>
@@ -327,6 +338,63 @@ class App extends Component {
         </div>
       );
     }
+  }
+
+  transact(token, recipientAddress, transactionAmount) {
+    if ((recipientAddress.startsWith("0x") && recipientAddress.length !== 42) || recipientAddress.length !== 40) {
+      alert('invalid recipient address');
+      return;
+    }
+    const publicKey = this.props.publicKey;
+    const amountInEther = this.props.web3.utils.toWei(transactionAmount, 'ether');
+    if (token.name === 'Ethereum') {
+      const ethTransaction = {
+        "from": publicKey,
+        "gas": "400000",
+        "to": recipientAddress,
+        "value": amountInEther
+      };
+
+      const signedTransaction = this.props.signTransactionFn(ethTransaction);
+      signedTransaction.then(transactionObj => {
+        this.props.web3.eth.sendSignedTransaction(transactionObj.rawTransaction)
+          .on('receipt', (receipt) => {
+            console.log(receipt)
+          })
+          .on('confirmation', (confirmation) => {
+            console.log('confirmed',confirmation);
+          })
+          .on('error', (error) => {
+            console.log('error occurred sending transaction', error);
+          })
+      });
+    } else {
+      const contractAddress = token.contractAddress;
+      const contract = this.getERC20Contract(contractAddress);
+      const abi = contract.methods.transfer(recipientAddress, amountInEther).encodeABI();
+      const rawTransaction = {
+        "from": publicKey,
+        "gas": "400000",
+        "to": contractAddress,
+        "value": "0x0",
+        "data": abi
+      };
+      const signedTransaction = this.props.signTransactionFn(rawTransaction);
+      console.log(signedTransaction);
+      signedTransaction.then(transactionObj => {
+        this.props.web3.eth.sendSignedTransaction(transactionObj.rawTransaction)
+          .on('receipt', (receipt) => {
+            console.log(receipt)
+          })
+          .on('confirmation', (confirmation) => {
+            console.log('confirmed',confirmation);
+          })
+          .on('error', (error) => {
+            console.log('error occurred sending transaction', error);
+          })
+      });
+    }
+
   }
 
   downloadKeystore(password) {
