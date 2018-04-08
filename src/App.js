@@ -10,7 +10,7 @@ import SnovioImage from './assets/snovio.png';
 import WethImage from './assets/weth.png';
 import LoopringImage from './assets/loopring.png';
 import * as constants from './store/constants';
-import Wally from './walrus.png';
+import Wally from './assets/walrus.png';
 
 const VITALIK_ADDRESS = '0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B';
 const SNOVIO_ADDRESS = '0xBDC5bAC39Dbe132B1E030e898aE3830017D7d969';
