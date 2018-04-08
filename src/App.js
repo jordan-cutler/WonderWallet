@@ -95,7 +95,7 @@ class App extends Component {
       return (
         <div style={{marginTop: 50}}>
           <div className="row topRow center-align">
-            <img className="logoSpec" src={Wally}/>
+            <img className="wally" src={Wally}/>
             <div className="wonder center-align">W&#0246;nderWallet</div>
             <div className="tagline center-align"><b>Hey! I am Wally</b> Is this your first time with Etherium? That is awesome. Put in a strong, secure password so we can secure your ethereum account.</div>
           </div>
@@ -141,7 +141,7 @@ class App extends Component {
       return (
         <div style={{marginTop: 50}}>
           <div className="row topRow center-align">
-            <img className="logoSpec" src={Wally}/>
+            <img className="wally" src={Wally}/>
             <div className="wonder center-align">W&#0246;nderWallet</div>
             <div className="tagline center-align"><b>Hey! Welcome back.</b> Put in your awesome password so we can help you access your ethereum account.</div>
           </div>
@@ -206,7 +206,7 @@ class App extends Component {
       return (
         <div>
           <div className="row topRow center-align" style={{marginTop: 30, marginBottom: 30}}>
-            <img className="logoSpec" src={Wally}/>
+            <img className="wally" src={Wally}/>
             <div className="wonder center-align">W&#0246;nderWallet</div>
             <div className="tagline center-align"><b>Hey! Welcome back.</b></div>
           </div>
