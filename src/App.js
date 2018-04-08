@@ -259,7 +259,6 @@ class App extends Component {
                 <div className="col m1"></div>
               </div>
               <div className="row formRow">
-              <div className="row">
                 <div className="input-field col s6 finalForm">
                   <div class="switch">
                     <label>
