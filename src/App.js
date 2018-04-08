@@ -265,14 +265,13 @@ class App extends Component {
                 </div>
                 <div className="col m1"></div>
                 <div className="container">
-                <div className="input-field col s7 m7">
-
-                  <p><b>Hey, Wally here!</b> Choose a color to save this ID!</p>
-                  <input type="color" id="html5colorpicker" onChange="clickColor(0, -1, -1, 5)" value="#ffffff" />
-                </div>
+                  <div className="input-field col s7 m7">
+                    <p><b>Hey, Wally here!</b> Choose a color to save this ID!</p>
+                    <input type="color" id="html5colorpicker" onChange="clickColor(0, -1, -1, 5)" value="#ffffff" />
+                  </div>
               </div>
             </div>
-            <div className="row">
+            <div className="row container">
               <div className="added-tokens">
                 <h3>Added Tokens</h3>
                 <p>Dogereum (DGC)</p>
@@ -280,7 +279,7 @@ class App extends Component {
                 <p>CSBereum  (CSB)</p>
               </div>
             </div>
-            <div className="row formRow">
+            <div className="row formRow container">
               {this.props.tokens.map(token => {
                 return (
                   <TokenCard
