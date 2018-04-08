@@ -9,7 +9,7 @@ class Favorites extends React.Component {
         <div key={favorites.publicID} className="col s6 friendGroup" style={{color: favorites.color, borderColor: favorites.color}}>
         	<i className="large material-icons" style={{color: favorites.color}}>{favorites.icon}</i>
         	<p className="truncate publicKey">{favorites.publicID}</p>
-        	<a onClick={() => this.setState({recipientAddress: favorites.publicID})} className="waves-effect btn-flat valign-wrapper friendButton">Pay Me</a>
+        	<a onClick={() => document.getElementByID("receiver").value = favorites.publicID} className="waves-effect btn-flat valign-wrapper friendButton">Pay Me</a>
         </div>
       );
     });
