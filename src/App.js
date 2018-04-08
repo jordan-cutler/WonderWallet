@@ -222,7 +222,6 @@ class App extends Component {
                 </div>
               </div>
             </div>
-          </div>
 
             <div className="row col s12 m12">
               <div className="col s12">
@@ -241,7 +240,7 @@ class App extends Component {
             <div className="row col s12">
               <hr></hr>
               <h5>Make a Payment:</h5>
-              </div>
+            </div>
 
               <form className="col s12">
                 <div className="row formRow">
@@ -330,8 +329,6 @@ class App extends Component {
                   </div>
                 </div>
               </form>
-            </div>
-          </div>
         </div>
       );
     }
