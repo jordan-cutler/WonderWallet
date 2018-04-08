@@ -34,6 +34,8 @@ const favoritesArray = [
   }
 ];//JSON.parse(localStorage.getItem('favoritesArray')) || [];
 
+const addedTokens = JSON.parse(localStorage.getItem('addedTokens')) || [];
+
 const defaultTokens = [
   {
     name: 'Ethereum',
@@ -90,7 +92,8 @@ const initialState = {
   tokens: defaultTokens,
   tokenBalances: constants.tokenBalances,
   tokenToUsd: {},
-  currentlySelectedToken: defaultTokens[0]
+  currentlySelectedToken: defaultTokens[0],
+  addedTokens: addedTokens
 };
 
 const reducer = (state = initialState, action) => {
@@ -147,6 +150,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         currentlySelectedToken: action.payload
+      };
+    case actionTypes.ADD_NEW_TOKEN:
+      return {
+        ...state,
+        addedTokens: [...addedTokens, action.payload]
       };
     default:
       return state;
