@@ -241,6 +241,7 @@ class App extends Component {
             <div className="row col s12">
               <hr></hr>
               <h5>Make a Payment:</h5>
+              </div>
 
               <form className="col s12">
                 <div className="row formRow">
