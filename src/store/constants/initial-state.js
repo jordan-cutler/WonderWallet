@@ -9,7 +9,7 @@ import * as states from './states';
 
 const web3 = new Web3('https://mainnet.infura.io/4VagvCAdkEkPEFAJw8LU');
 
-export const tokenBalances = {
+export const TOKEN_BALANCES_INITIAL = {
   AppCoin: 0,
   EOS: 0,
   Loopring: 0,
@@ -17,7 +17,7 @@ export const tokenBalances = {
   WETH: 0
 };
 
-export const favoritesArray = [
+export const FAVORITES = JSON.parse(localStorage.getItem('FAVORITES')) || [
   {
     publicID: '0xd8F4d1493ec3b76674856b4c01dF4d337B3df97D',
     color: '#8E4A49',
@@ -38,11 +38,11 @@ export const favoritesArray = [
     color: '#253C78',
     icon: 'videogame_asset'
   }
-];//JSON.parse(localStorage.getItem('favoritesArray')) || [];
+];
 
-export const addedTokens = JSON.parse(localStorage.getItem('addedTokens')) || [];
+export const ADDED_TOKENS_INITIAL = JSON.parse(localStorage.getItem('ADDED_TOKENS')) || [];
 
-export const defaultTokens = [
+export const DEFAULT_TOKENS = [
   {
     name: 'Ethereum',
     symbol: 'ETH',
@@ -87,18 +87,18 @@ export const defaultTokens = [
   }
 ];
 
-export const initialState = {
+export const INITIAL_STATE = {
   web3: web3,
-  favorites: favoritesArray,
+  favorites: FAVORITES,
   screen: states.CREATION_STATE,
   privateKey: '',
   publicKey: '',
   accountBalance: '',
   signTransactionFn: null,
-  tokens: defaultTokens,
-  tokenBalances: tokenBalances,
+  tokens: DEFAULT_TOKENS,
+  tokenBalances: TOKEN_BALANCES_INITIAL,
   tokenToUsd: {},
-  currentlySelectedToken: defaultTokens[0],
-  addedTokens: addedTokens
+  currentlySelectedToken: DEFAULT_TOKENS[0],
+  addedTokens: ADDED_TOKENS_INITIAL
 };
 

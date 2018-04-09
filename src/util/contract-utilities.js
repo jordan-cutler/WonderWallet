@@ -1,7 +1,7 @@
-import { store } from '../store/constants/store';
+import { STORE } from '../store/constants/store';
 
 export const getERC20Contract = (address) => {
-  const web3 = store.getState().web3;
+  const web3 = STORE.getState().web3;
   return new web3.eth.Contract([
     {
       'constant': true,

@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 
 class Favorites extends React.Component {
   render() {
-    return this.props.favoritesArray.map((favorites) => {
+    return this.props.favorites.map((favorite) => {
       return (
-        <div key={favorites.publicID} className="col s6 friendGroup" style={{color: favorites.color, borderColor: favorites.color}}>
-        	<i className="large material-icons" style={{color: favorites.color}}>{favorites.icon}</i>
-        	<p className="truncate publicKey">{favorites.publicID}</p>
-        	<a onClick={() => document.getElementByID("receiver").value = favorites.publicID} className="waves-effect btn-flat valign-wrapper friendButton">Pay Me</a>
+        <div key={favorite.publicID} className="col s6 friendGroup" style={{color: favorite.color, borderColor: favorite.color}}>
+        	<i className="large material-icons" style={{color: favorite.color}}>{favorite.icon}</i>
+        	<p className="truncate publicKey">{favorite.publicID}</p>
+        	<a onClick={() => document.getElementByID("receiver").value = favorite.publicID} className="waves-effect btn-flat valign-wrapper friendButton">Pay Me</a>
         </div>
       );
     });
@@ -18,7 +18,7 @@ class Favorites extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    favoritesArray: state.favorites
+    favorites: state.favorites
   };
 };
 

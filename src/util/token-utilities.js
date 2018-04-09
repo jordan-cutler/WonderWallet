@@ -1,5 +1,5 @@
 import * as actionTypes from '../store/constants/actions';
-import { store } from '../store/constants/store';
+import { STORE } from '../store/constants/store';
 import { getERC20Contract } from './contract-utilities';
 
 export const updateTokenBalances = (publicKey, tokens) => {
@@ -13,7 +13,7 @@ export const updateTokenBalances = (publicKey, tokens) => {
   });
 };
 
-export const updateTokenBalance = (tokenName, balance) => store.dispatch({
+export const updateTokenBalance = (tokenName, balance) => STORE.dispatch({
   type: actionTypes.UPDATE_ACCOUNT_BALANCE,
   payload: {
     name: tokenName,

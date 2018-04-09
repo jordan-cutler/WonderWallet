@@ -2,7 +2,7 @@ import * as states from './constants/states';
 import * as actionTypes from './constants/actions';
 import * as constants from './constants/initial-state';
 
-const reducer = (state = constants.initialState, action) => {
+const reducer = (state = constants.INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.SET_INITIAL_STATE:
       return {
