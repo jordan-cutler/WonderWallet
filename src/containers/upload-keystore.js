@@ -83,7 +83,11 @@ class UploadKeystore extends React.Component {
   uploadKeystore(fileObject, password) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      const json = JSON.parse(e.target.result);
+      const parsed = JSON.parse(e.target.result);
+      const json = {
+        ...parsed,
+        crypto: parsed.Crypto || parsed.crypto
+      }; // since for some reason myetherwallet downloads have the json crypto attribute start with a capital C
       const keystore = this.props.web3.eth.accounts.decrypt(json, password);
       if (keystore) {
         stateUtilities.setStatePropertiesFromKeystoreThenGoToMainState(keystore);
