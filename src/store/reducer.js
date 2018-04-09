@@ -7,12 +7,12 @@ const reducer = (state = constants.initialState, action) => {
     case actionTypes.SET_INITIAL_STATE:
       return {
         ...state,
-        screen: states.INITIAL_STATE
+        screen: states.CREATION_STATE
       };
     case actionTypes.SET_CREATION_STATE:
       return {
         ...state,
-        screen: states.CREATION_STATE
+        screen: states.UPLOAD_STATE
       };
     case actionTypes.SET_MAIN_STATE:
       return {

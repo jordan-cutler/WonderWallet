@@ -90,7 +90,7 @@ export const defaultTokens = [
 export const initialState = {
   web3: web3,
   favorites: favoritesArray,
-  screen: states.INITIAL_STATE,
+  screen: states.CREATION_STATE,
   privateKey: '',
   publicKey: '',
   accountBalance: '',
