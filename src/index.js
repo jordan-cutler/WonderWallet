@@ -1,17 +1,12 @@
-import * as actionTypes from './store/actions';
+import * as actionTypes from './store/constants/actions';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import reducer from './store/reducer';
+import { store } from './store/constants/store';
 import axios from 'axios';
-
-const store = createStore(reducer);
-
 
 axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=LRC,ETH,APPC,EOS,SNOV,WETH&tsyms=USD').then(res => {
   const lrcValue = res.data.LRC.USD;

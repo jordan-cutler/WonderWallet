@@ -1,5 +1,5 @@
 import React from 'react';
-import * as actionTypes from '../store/actions';
+import * as actionTypes from '../store/constants/actions';
 import classNames from 'classnames';
 
 import { connect } from 'react-redux';
@@ -20,7 +20,7 @@ class TokenCard extends React.Component {
           className="center-align description">{this.props.name}
           ({this.props.symbol})</p>
         <p className="center-align">
-          <strong>{this.props.balance}</strong>
+          {this.props.balance}
         </p>
       </div>
     )

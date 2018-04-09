@@ -1,5 +1,5 @@
 import React from 'react';
-import * as actionTypes from '../store/actions';
+import * as actionTypes from '../store/constants/actions';
 import classNames from 'classnames';
 import WalrusImage from '../assets/walrus.png';
 
