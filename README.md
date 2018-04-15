@@ -2,6 +2,8 @@
 
 ### By: Jordan Cutler, Will Peracchio, John (Jack) Cunningham
 
+**Project Url: https://eth-wonder-wallet.herokuapp.com/**
+
 This project was put together in a ~48 hour period during the LVHacks Spring 2018 Hackathon. 
 The company challenge was to create a light cryptocurrency wallet that allowed users to download a keystore,
 upload a keystore, send ether and a set of default ERC20 tokens, add more ERC20 tokens to trade with, and view 
